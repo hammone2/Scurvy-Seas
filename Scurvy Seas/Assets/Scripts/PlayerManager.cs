@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class PlayerManager : MonoBehaviour
     public TextMeshProUGUI degreesText;
     [SerializeField] float rotationSpeed;
     [SerializeField] GameObject wheelSprite;
+    [SerializeField] Slider sailSlider;
+
+    public ShipMovement playerShip;
 
     private void Awake()
     {
@@ -33,6 +37,7 @@ public class PlayerManager : MonoBehaviour
 
     public void HandleSteer(int direction)
     {
-        steeringDirection = direction;
+        steeringDirection = -direction;
+        playerShip.HandleSteer(-direction);
     }
 }
