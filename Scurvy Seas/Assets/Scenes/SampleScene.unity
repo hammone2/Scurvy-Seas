@@ -546,7 +546,7 @@ MonoBehaviour:
   degreesText: {fileID: 553309334}
   rotationSpeed: 45
   wheelSprite: {fileID: 718713505}
-  sailSlider: {fileID: 0}
+  sailSlider: {fileID: 1833404596}
   playerShip: {fileID: 820473145}
 --- !u!4 &510972744
 Transform:
@@ -1247,8 +1247,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   steeringDirection: 0
   turnSpeed: 50
-  moveSpeed: 100
-  turnStrength: 0
+  moveSpeed: 40
+  thrustAmount: 0
+  turnStrength: 100
 --- !u!54 &820473146
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1258,8 +1259,8 @@ Rigidbody:
   m_GameObject: {fileID: 820473143}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 2
-  m_AngularDamping: 0.05
+  m_LinearDamping: 5
+  m_AngularDamping: 5
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -1909,7 +1910,19 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 510972743}
+        m_TargetAssemblyTypeName: PlayerManager, Assembly-CSharp
+        m_MethodName: HandleThrust
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1847541309
 GameObject:
   m_ObjectHideFlags: 0

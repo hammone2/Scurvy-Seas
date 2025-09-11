@@ -6,9 +6,12 @@ public class ShipMovement : MonoBehaviour
 
     public float turnSpeed = 50f;
     public float moveSpeed = 100f;
-    public float turnStrength = 0f;
+    public float thrustAmount = 0f;
+    public float turnStrength = 0.1f;
 
     private Rigidbody rb;
+
+    private float rudderAngle = 0;
 
     private void Start()
     {
@@ -17,23 +20,27 @@ public class ShipMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (steeringDirection != 0)
-        {
-            float currentAngle = Mathf.DeltaAngle(0, transform.eulerAngles.y);
+        // Forward speed (signed)
+        float speed = Vector3.Dot(rb.linearVelocity, transform.forward);
 
-            if (currentAngle > -45f && currentAngle < 45f)
-                transform.Rotate(new Vector3(0, turnSpeed, 0) * Time.deltaTime * steeringDirection);
+        // Rudder effect (more accurate than just using degrees directly)
+        float rudderEffect = Mathf.Sin(rudderAngle * Mathf.Deg2Rad); // -1 to 1
 
-            //correction
-            float newAngle = Mathf.Clamp(Mathf.DeltaAngle(0, transform.eulerAngles.y) + turnSpeed * Time.deltaTime * steeringDirection, -45f, 45f);
-            transform.rotation = Quaternion.Euler(0, newAngle, 0);
-        }
+        // Torque = rudder influence * speed * sensitivity
+        float torqueAmount = rudderEffect * speed * turnStrength;
 
+        rb.AddForce(transform.forward * thrustAmount * moveSpeed, ForceMode.Acceleration);
 
     }
 
-    public void HandleSteer(int direction)
+    public void HandleSteer(int direction, float angle)
     {
         steeringDirection = -direction;
+        rudderAngle = angle;
+    }
+
+    public void HandleThrust(float amount)
+    {
+        thrustAmount = amount;
     }
 }

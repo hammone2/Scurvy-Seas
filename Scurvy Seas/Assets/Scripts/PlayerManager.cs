@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviour
 
     public ShipMovement playerShip;
 
+    private float newAngle = 0;
+
     private void Awake()
     {
         instance = this;
@@ -28,7 +30,7 @@ public class PlayerManager : MonoBehaviour
                 wheelSprite.transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime * steeringDirection);
 
             //correction
-            float newAngle = Mathf.Clamp(Mathf.DeltaAngle(0, wheelSprite.transform.eulerAngles.z) + rotationSpeed * Time.deltaTime * steeringDirection, -45f, 45f);
+            newAngle = Mathf.Clamp(Mathf.DeltaAngle(0, wheelSprite.transform.eulerAngles.z) + rotationSpeed * Time.deltaTime * steeringDirection, -45f, 45f);
             wheelSprite.transform.rotation = Quaternion.Euler(0, 0, newAngle);
 
             degreesText.SetText("Deg: " + newAngle.ToString("F1")); //round angle to 1 decimal place
@@ -38,6 +40,13 @@ public class PlayerManager : MonoBehaviour
     public void HandleSteer(int direction)
     {
         steeringDirection = -direction;
-        playerShip.HandleSteer(-direction);
+        playerShip.HandleSteer(-direction, newAngle);
+    }
+
+    public void HandleThrust()
+    {
+        float amount = sailSlider.value;
+        if (amount > 0)
+            playerShip.HandleThrust(amount);
     }
 }
