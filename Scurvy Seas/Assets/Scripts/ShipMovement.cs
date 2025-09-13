@@ -11,8 +11,6 @@ public class ShipMovement : MonoBehaviour
 
     private Rigidbody rb;
 
-    private float rudderAngle = 0;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -20,27 +18,39 @@ public class ShipMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // Forward speed (signed)
-        float speed = Vector3.Dot(rb.linearVelocity, transform.forward);
-
-        // Rudder effect (more accurate than just using degrees directly)
-        float rudderEffect = Mathf.Sin(rudderAngle * Mathf.Deg2Rad); // -1 to 1
-
-        // Torque = rudder influence * speed * sensitivity
-        float torqueAmount = rudderEffect * speed * turnStrength;
-
-        rb.AddForce(transform.forward * thrustAmount * moveSpeed, ForceMode.Acceleration);
-
-    }
-
-    public void HandleSteer(int direction, float angle)
-    {
-        steeringDirection = -direction;
-        rudderAngle = angle;
+        MoveShip();
+        SteerShip();
     }
 
     public void HandleThrust(float amount)
     {
         thrustAmount = amount;
+    }
+
+    public void HandleSteer(int direction)
+    {
+        steeringDirection = -direction;
+    }
+
+    private void MoveShip()
+    {
+        if (thrustAmount <= 0)
+            return;
+
+        Vector3 forwardMovement = transform.forward * thrustAmount * moveSpeed * Time.deltaTime;
+
+        rb.AddForce(forwardMovement, ForceMode.Acceleration);
+    }
+
+    private void SteerShip()
+    {
+        if (rb.linearVelocity.magnitude > 0.1f) //avoid rotation when stationary
+        {
+            float currentSpeed = rb.linearVelocity.magnitude;
+            float steerSpeed = turnStrength * currentSpeed;
+
+            float rotation = steeringDirection * steerSpeed * Time.deltaTime;
+            rb.AddTorque(Vector3.up * rotation, ForceMode.VelocityChange);
+        }
     }
 }
