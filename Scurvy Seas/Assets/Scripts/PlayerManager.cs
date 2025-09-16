@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour
         instance = this;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (steeringDirection != 0)
         {

@@ -408,6 +408,8 @@ MonoBehaviour:
   offset: {x: 0, y: 24.8, z: -15}
   followThis: {fileID: 820473144}
   moveSpeed: 3.5
+  maxYOffset: 100
+  minYOffset: 10
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
