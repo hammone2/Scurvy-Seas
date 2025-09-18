@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -13,9 +14,18 @@ public class PlayerManager : MonoBehaviour
 
     public ShipMovement playerShip;
 
+    public Crewmate testCrewmate; //delete this later
+
+    private Camera playerCamera;
+
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        playerCamera = Camera.main;
     }
 
     private void Update()
@@ -25,6 +35,11 @@ public class PlayerManager : MonoBehaviour
             float currentAngle = Mathf.DeltaAngle(0, wheelSprite.transform.eulerAngles.z);
 
             wheelSprite.transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime * steeringDirection);
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            MoveToMouseClick();
         }
     }
 
@@ -38,5 +53,16 @@ public class PlayerManager : MonoBehaviour
     {
         float amount = sailSlider.value;
         playerShip.HandleThrust(amount);
+    }
+
+    void MoveToMouseClick()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            testCrewmate.GetComponent<NavMeshAgent>().SetDestination(hit.point); //make it a local position on tne ship
+        }
     }
 }
