@@ -32,22 +32,25 @@ public class Crewmate : MonoBehaviour
         {
             //update target destination
             if (agent.enabled && navTarget != null)
+            {
                 agent.destination = navTarget.position; //change this later so its not being calculated every frame
+
+                //rotate the character towards the target
+                Vector3 targetDirection = navTarget.position - transform.position;
+                targetDirection.y = 0;
+
+                if (targetDirection != Vector3.zero)
+                {
+                    Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                }
+            }
+                
 
             //disable the agent once we reach the target
             if (agent.enabled && !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
                 agent.enabled = false; //using enable as opposed to isStopped so the agent wont slide around on the deck
-            }
-
-            //rotate the character towards the target
-            Vector3 targetDirection = navTarget.position - transform.position;
-            targetDirection.y = 0;
-
-            if (targetDirection != Vector3.zero)
-            {
-                Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
             }
         }
     }
