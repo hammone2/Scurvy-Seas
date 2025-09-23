@@ -33,7 +33,7 @@ public class ShipMovement : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         MoveShip();
         SteerShip();
