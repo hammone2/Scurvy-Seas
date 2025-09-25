@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
@@ -11,12 +12,14 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] GameObject wheelSprite;
     [SerializeField] Slider sailSlider;
+    [SerializeField] LayerMask floorLayers;
 
     public ShipMovement playerShip;
 
     public Crewmate testCrewmate; //delete this later
 
     private Camera playerCamera;
+
 
     private void Awake()
     {
@@ -60,9 +63,9 @@ public class PlayerManager : MonoBehaviour
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit/*, floorLayers*/))
         {
-            testCrewmate.GetComponent<NavMeshAgent>().SetDestination(hit.point); //make it a local position on tne ship
+            testCrewmate.SetNavDestination(hit.point);
         }
     }
 }
