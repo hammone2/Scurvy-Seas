@@ -70,4 +70,9 @@ public class Task : MonoBehaviour
             other.GetComponent<Crewmate>().isDoingTask = isManned;
         }
     }
+
+    public bool GetIsManned()
+    {
+        return isManned;
+    }
 }

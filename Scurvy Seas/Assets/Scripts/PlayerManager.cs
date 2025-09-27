@@ -19,6 +19,7 @@ public class PlayerManager : MonoBehaviour
     public Crewmate testCrewmate; //delete this later
 
     private Camera playerCamera;
+    private float rayCastMaxDist = 777f;
 
 
     private void Awake()
@@ -74,7 +75,7 @@ public class PlayerManager : MonoBehaviour
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, floorLayers))
+        if (Physics.Raycast(ray, out hit, rayCastMaxDist, floorLayers))
         {
             testCrewmate.SetNavDestination(hit.point);
         }
