@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -13,6 +11,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject wheelSprite;
     [SerializeField] Slider sailSlider;
     [SerializeField] LayerMask floorLayers;
+    [SerializeField] GameObject wheelDisabledUI;
+    [SerializeField] GameObject sailsDisabledUI;
 
     public ShipMovement playerShip;
 
@@ -29,6 +29,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         playerCamera = Camera.main;
+        playerShip.SetPlayerManager(this);
     }
 
     private void Update()
@@ -58,12 +59,22 @@ public class PlayerManager : MonoBehaviour
         playerShip.HandleThrust(amount);
     }
 
+    public void SetSteerTask(bool _canSteer)
+    {
+        wheelDisabledUI.SetActive(_canSteer);
+    }
+
+    public void SetSailTask(bool _canSetSailLength)
+    {
+        sailsDisabledUI.SetActive(_canSetSailLength);
+    }
+
     void MoveToMouseClick()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit/*, floorLayers*/))
+        if (Physics.Raycast(ray, out hit, floorLayers))
         {
             testCrewmate.SetNavDestination(hit.point);
         }
