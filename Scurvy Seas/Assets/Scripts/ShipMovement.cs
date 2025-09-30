@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ShipMovement : MonoBehaviour
+public class ShipMovement : MonoBehaviour, IKillable //add a ship base class later that controls non-movement stuff
 {
     public int steeringDirection = 0;
 
@@ -20,7 +20,6 @@ public class ShipMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
 
         //initial get crewmates
         for (int i = 0; i < transform.childCount; i++)
@@ -102,5 +101,10 @@ public class ShipMovement : MonoBehaviour
     public void SetPlayerManager(PlayerManager _playerManager)
     {
         playerManager = _playerManager;
+    }
+
+    public void Die()
+    {
+        Destroy(gameObject);
     }
 }

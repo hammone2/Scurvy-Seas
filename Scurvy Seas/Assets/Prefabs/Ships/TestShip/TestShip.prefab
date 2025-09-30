@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4525599960080420089}
   - component: {fileID: 276095845518873137}
   - component: {fileID: 2546163046374695707}
+  - component: {fileID: 6948434414308813949}
   m_Layer: 0
   m_Name: TestShip
   m_TagString: Untagged
@@ -82,6 +83,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &6948434414308813949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2621342780049006505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a252cea8d782c84990d7dabec7c36f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 10
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 276095845518873137}
+        m_TargetAssemblyTypeName: ShipMovement, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5408396584088396739
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,6 @@ public class Cannon : MonoBehaviour
             ball.GetComponent<Rigidbody>().AddForce(projectileSpawner.forward * launchForce, ForceMode.VelocityChange); //implement a range calculation later using the salvaged steel artillery code
 
         Invoke("CoolDown", fireRate);
-        Debug.Log("cannon fired @ " + Time.time);
     }
 
     private void CoolDown()

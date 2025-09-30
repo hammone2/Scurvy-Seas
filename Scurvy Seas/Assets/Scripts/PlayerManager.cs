@@ -11,12 +11,16 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject wheelSprite;
     [SerializeField] Slider sailSlider;
     [SerializeField] LayerMask floorLayers;
+    [SerializeField] LayerMask crewmateLayer;
     [SerializeField] GameObject wheelDisabledUI;
     [SerializeField] GameObject sailsDisabledUI;
 
     public ShipMovement playerShip;
 
     public Crewmate testCrewmate; //delete this later
+
+    [SerializeField] Crewmate selectedCrewmate;
+    private bool isCrewmateSelected = false;
 
     private Camera playerCamera;
     private float rayCastMaxDist = 777f;
@@ -42,7 +46,14 @@ public class PlayerManager : MonoBehaviour
             wheelSprite.transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime * steeringDirection);
         }
 
+
         if (Input.GetMouseButtonDown(0))
+        {
+            SelectCrewMate();
+        }
+
+        //move the crewmate
+        if (Input.GetMouseButtonDown(1))
         {
             MoveToMouseClick();
         }
@@ -72,12 +83,31 @@ public class PlayerManager : MonoBehaviour
 
     void MoveToMouseClick()
     {
+        if (!isCrewmateSelected)
+            return;
+
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, rayCastMaxDist, floorLayers))
         {
-            testCrewmate.SetNavDestination(hit.point);
+            selectedCrewmate.SetNavDestination(hit.point);
+        }
+    }
+
+    void SelectCrewMate()
+    {
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, rayCastMaxDist, crewmateLayer))
+        {
+            Crewmate crewmate = hit.collider.GetComponent<Crewmate>();
+            if (crewmate != null)
+            {
+                selectedCrewmate = crewmate;
+                isCrewmateSelected = true;
+            }
         }
     }
 }

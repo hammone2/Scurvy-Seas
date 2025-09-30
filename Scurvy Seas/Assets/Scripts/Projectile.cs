@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Damager))]
 public class Projectile : MonoBehaviour
 {
     void Start()
@@ -10,5 +11,15 @@ public class Projectile : MonoBehaviour
     private void Despawn()
     {
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Despawn();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Despawn();
     }
 }
