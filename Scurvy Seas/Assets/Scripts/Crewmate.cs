@@ -10,6 +10,8 @@ public class Crewmate : MonoBehaviour
     [SerializeField] private GameObject rotated;
     [SerializeField] private float rotationSpeed;
 
+    public bool isDoingTask; 
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();

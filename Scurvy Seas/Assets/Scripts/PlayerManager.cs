@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -13,12 +11,19 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject wheelSprite;
     [SerializeField] Slider sailSlider;
     [SerializeField] LayerMask floorLayers;
+    [SerializeField] LayerMask crewmateLayer;
+    [SerializeField] GameObject wheelDisabledUI;
+    [SerializeField] GameObject sailsDisabledUI;
 
     public ShipMovement playerShip;
 
     public Crewmate testCrewmate; //delete this later
 
+    [SerializeField] Crewmate selectedCrewmate;
+    private bool isCrewmateSelected = false;
+
     private Camera playerCamera;
+    private float rayCastMaxDist = 777f;
 
 
     private void Awake()
@@ -29,6 +34,7 @@ public class PlayerManager : MonoBehaviour
     private void Start()
     {
         playerCamera = Camera.main;
+        playerShip.SetPlayerManager(this);
     }
 
     private void Update()
@@ -40,7 +46,14 @@ public class PlayerManager : MonoBehaviour
             wheelSprite.transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime * steeringDirection);
         }
 
+
         if (Input.GetMouseButtonDown(0))
+        {
+            SelectCrewMate();
+        }
+
+        //move the crewmate
+        if (Input.GetMouseButtonDown(1))
         {
             MoveToMouseClick();
         }
@@ -58,14 +71,43 @@ public class PlayerManager : MonoBehaviour
         playerShip.HandleThrust(amount);
     }
 
+    public void SetSteerTask(bool _canSteer)
+    {
+        wheelDisabledUI.SetActive(_canSteer);
+    }
+
+    public void SetSailTask(bool _canSetSailLength)
+    {
+        sailsDisabledUI.SetActive(_canSetSailLength);
+    }
+
     void MoveToMouseClick()
+    {
+        if (!isCrewmateSelected)
+            return;
+
+        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, rayCastMaxDist, floorLayers))
+        {
+            selectedCrewmate.SetNavDestination(hit.point);
+        }
+    }
+
+    void SelectCrewMate()
     {
         Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit/*, floorLayers*/))
+        if (Physics.Raycast(ray, out hit, rayCastMaxDist, crewmateLayer))
         {
-            testCrewmate.SetNavDestination(hit.point);
+            Crewmate crewmate = hit.collider.GetComponent<Crewmate>();
+            if (crewmate != null)
+            {
+                selectedCrewmate = crewmate;
+                isCrewmateSelected = true;
+            }
         }
     }
 }
