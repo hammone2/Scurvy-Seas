@@ -6,6 +6,14 @@ public class Damagable : MonoBehaviour
 {
     public float health;
     public UnityEvent OnDeath;
+    [SerializeField] private Healthbar healthBar;
+
+
+    private void Start()
+    {
+        if (healthBar != null)
+            healthBar.InitializeHealth(health);
+    }
 
     public void TakeDamage(float damage)
     {
@@ -13,6 +21,8 @@ public class Damagable : MonoBehaviour
             return;
 
         health -= damage;
+        if (healthBar != null)
+            healthBar.UpdateHealth(health);
         Debug.Log(health);
 
         if (health <= 0)

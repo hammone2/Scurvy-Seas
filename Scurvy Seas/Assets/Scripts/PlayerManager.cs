@@ -14,6 +14,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] LayerMask crewmateLayer;
     [SerializeField] GameObject wheelDisabledUI;
     [SerializeField] GameObject sailsDisabledUI;
+    [SerializeField] Healthbar healthBar;
 
     public ShipMovement playerShip;
 
