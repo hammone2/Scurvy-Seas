@@ -1,17 +1,31 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class SteeringButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class SteeringButton : MonoBehaviour
 {
     public int direction = 0;
+    private bool isSteering = false;
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        PlayerManager.instance.HandleSteer(direction);
+    public void ToggleSteer()
+    {      
+        int _direction;
+
+        if (isSteering)
+        {
+            isSteering = false;
+            _direction = 0;
+        }
+        else 
+        { 
+            isSteering = true;
+            _direction = direction;
+        }
+
+        PlayerManager.instance.HandleSteer(_direction);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    //for when we click on the other button
+    public void DisableSteer()
     {
-        PlayerManager.instance.HandleSteer(0);
+        isSteering = false;
     }
 }

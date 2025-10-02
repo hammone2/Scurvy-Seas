@@ -979,9 +979,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126917927}
     m_Modifications:
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1993784769}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DisableSteer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SteeringButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2482049532236866152, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
       propertyPath: m_Name
-      value: SteeringButton
+      value: SteeringButtonRIGHT
       objectReference: {fileID: 0}
     - target: {fileID: 3973192815400637171, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
       propertyPath: direction
@@ -1077,6 +1105,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7694548286119434473, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
   m_PrefabInstance: {fileID: 817130909}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &817130911 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3973192815400637171, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+  m_PrefabInstance: {fileID: 817130909}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7231dc9b67bc7409ddab747cf766b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &820473144 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4525599960080420089, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
@@ -1352,9 +1391,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126917927}
     m_Modifications:
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 817130911}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: DisableSteer
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: SteeringButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1416802930581830717, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2482049532236866152, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
       propertyPath: m_Name
-      value: SteeringButton
+      value: SteeringButtonLEFT
       objectReference: {fileID: 0}
     - target: {fileID: 3973192815400637171, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
       propertyPath: direction
@@ -2733,6 +2800,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1880090058}
   m_CullTransparentMesh: 1
+--- !u!114 &1993784769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3973192815400637171, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+  m_PrefabInstance: {fileID: 948733229}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce7231dc9b67bc7409ddab747cf766b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1994252499
 GameObject:
   m_ObjectHideFlags: 0
