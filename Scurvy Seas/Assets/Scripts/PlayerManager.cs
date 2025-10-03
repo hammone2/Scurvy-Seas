@@ -106,9 +106,18 @@ public class PlayerManager : MonoBehaviour
             Crewmate crewmate = hit.collider.GetComponent<Crewmate>();
             if (crewmate != null)
             {
+                if (isCrewmateSelected)
+                    selectedCrewmate.ToggleOutline();
+
                 selectedCrewmate = crewmate;
                 isCrewmateSelected = true;
+                selectedCrewmate.ToggleOutline();
             }
+        }
+        else if (isCrewmateSelected)
+        {
+            isCrewmateSelected = false;
+            selectedCrewmate.ToggleOutline();
         }
     }
 }

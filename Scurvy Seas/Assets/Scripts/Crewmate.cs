@@ -10,6 +10,8 @@ public class Crewmate : MonoBehaviour
     [SerializeField] private GameObject rotated;
     [SerializeField] private float rotationSpeed;
 
+    [SerializeField] private Outline outline;
+
     public bool isDoingTask; 
 
     private void Awake()
@@ -83,5 +85,10 @@ public class Crewmate : MonoBehaviour
         {
             Debug.LogWarning("NavPoint or newParent is null in ReparentNavPoint.");
         }
+    }
+
+    public void ToggleOutline()
+    {
+        outline.enabled = !outline.enabled;
     }
 }
