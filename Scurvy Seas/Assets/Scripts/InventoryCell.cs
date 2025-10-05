@@ -2,15 +2,17 @@ using UnityEngine;
 
 public class InventoryCell : MonoBehaviour
 {
-    public bool isOccupied = false;
+    private bool isOccupied = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        isOccupied = true;
+        if (other.CompareTag("AnchorPointCollider"))
+            isOccupied = true;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        isOccupied = false;
+        if (other.CompareTag("AnchorPointCollider"))
+            isOccupied = false;
     }
 }

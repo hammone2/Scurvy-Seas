@@ -11,6 +11,8 @@ public class InventorySystem : MonoBehaviour
     private List<GameObject> cells = new List<GameObject>();
     private bool isActive = false;
     [SerializeField] private GameObject cellPrefab;
+    [SerializeField] private Transform cellContainer;
+    [SerializeField] private Transform itemContainer;
 
     private void Start()
     {
@@ -40,7 +42,7 @@ public class InventorySystem : MonoBehaviour
             for (int y = 0; y < size.y; y++)
             {
                 Vector3 newPosition = new Vector3(x * cellSize + spacing, y * cellSize + spacing, 0);
-                GameObject newCell = Instantiate(cellPrefab, transform);
+                GameObject newCell = Instantiate(cellPrefab, cellContainer);
                 cells.Add(newCell);
                 newCell.transform.localPosition = newPosition;
             }

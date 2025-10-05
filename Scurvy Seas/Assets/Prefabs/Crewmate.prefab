@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 6995542575944692796}
   - component: {fileID: 8763892237788249917}
   - component: {fileID: 431263505494509764}
+  - component: {fileID: 2371646637017599917}
   m_Layer: 3
   m_Name: Crewmate
   m_TagString: Untagged
@@ -231,6 +232,45 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2371646637017599917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3569671488068865340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61320ce8d329ed8458a7e4755134aff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6995542575944692796}
+        m_TargetAssemblyTypeName: Crewmate, Assembly-CSharp
+        m_MethodName: ToggleOutline
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6995542575944692796}
+        m_TargetAssemblyTypeName: Crewmate, Assembly-CSharp
+        m_MethodName: SelectCrewmate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5678170569879961335
 GameObject:
   m_ObjectHideFlags: 0
