@@ -91,4 +91,9 @@ public class Crewmate : MonoBehaviour
     {
         outline.enabled = !outline.enabled;
     }
+
+    public void SelectCrewmate()
+    {
+        PlayerManager.instance.SetSelectedCrewmate(this);
+    }
 }

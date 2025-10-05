@@ -11,21 +11,21 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject wheelSprite;
     [SerializeField] Slider sailSlider;
     [SerializeField] LayerMask floorLayers;
-    [SerializeField] LayerMask crewmateLayer;
+    [SerializeField] LayerMask clickableLayers;
     [SerializeField] GameObject wheelDisabledUI;
     [SerializeField] GameObject sailsDisabledUI;
     [SerializeField] Healthbar healthBar;
 
     public ShipMovement playerShip;
 
-    public Crewmate testCrewmate; //delete this later
-
     [SerializeField] Crewmate selectedCrewmate;
     private bool isCrewmateSelected = false;
 
     private Camera playerCamera;
+    public Camera inventoryCamera;
     private float rayCastMaxDist = 777f;
 
+    private bool isInventoryOpen = false;
 
     private void Awake()
     {
@@ -47,10 +47,9 @@ public class PlayerManager : MonoBehaviour
             wheelSprite.transform.Rotate(new Vector3(0, 0, rotationSpeed) * Time.deltaTime * steeringDirection);
         }
 
-
         if (Input.GetMouseButtonDown(0))
         {
-            SelectCrewMate();
+            OnMouseLeftClicked();
         }
 
         //move the crewmate
@@ -96,22 +95,34 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void SelectCrewMate()
+    public void SetSelectedCrewmate(Crewmate _crewmate)
     {
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
+        if (isCrewmateSelected)
+            selectedCrewmate.ToggleOutline();
 
-        if (Physics.Raycast(ray, out hit, rayCastMaxDist, crewmateLayer))
+        selectedCrewmate = _crewmate;
+        isCrewmateSelected = true;
+    }
+
+    private void OnMouseLeftClicked()
+    {
+        Collider hit;
+
+        if (!isInventoryOpen) 
         {
-            Crewmate crewmate = hit.collider.GetComponent<Crewmate>();
-            if (crewmate != null)
-            {
-                if (isCrewmateSelected)
-                    selectedCrewmate.ToggleOutline();
+            hit = ShootRaycast(playerCamera);
+        }
+        else 
+        {
+            hit = ShootRaycast(inventoryCamera);
+        }
 
-                selectedCrewmate = crewmate;
-                isCrewmateSelected = true;
-                selectedCrewmate.ToggleOutline();
+        if (hit != null)
+        {
+            Clickable clickableObject = hit.GetComponent<Clickable>();
+            if (clickableObject != null)
+            {
+                clickableObject.Clicked();
             }
         }
         else if (isCrewmateSelected)
@@ -119,5 +130,22 @@ public class PlayerManager : MonoBehaviour
             isCrewmateSelected = false;
             selectedCrewmate.ToggleOutline();
         }
+    }
+
+    private Collider ShootRaycast(Camera camera)
+    {
+        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, rayCastMaxDist, clickableLayers))
+        {
+            return hit.collider;
+        }
+        return null;
+    }
+
+    public void SetIsInventoryOpen()
+    {
+        isInventoryOpen = !isInventoryOpen;
     }
 }
