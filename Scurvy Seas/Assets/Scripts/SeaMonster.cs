@@ -11,6 +11,8 @@ public class SeaMonster : MonoBehaviour, IKillable
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float launchForce = 50f;
 
+    [SerializeField] private GameObject itemDrop;
+
     private Transform player;
 
     private void Start()
@@ -55,6 +57,8 @@ public class SeaMonster : MonoBehaviour, IKillable
 
     public void Die()
     {
+        Instantiate(itemDrop);
+        itemDrop.transform.position = transform.position;
         Destroy(gameObject);
     }
 }
