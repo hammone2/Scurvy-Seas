@@ -3,8 +3,10 @@ using UnityEngine;
 public class InventoryItem : MonoBehaviour
 {
     private bool isDragging = false;
+    private bool isInInventory = false;
     [SerializeField] float zDepth;
     [SerializeField] Transform anchorPoints;
+    [SerializeField] GameObject itemDropPrefab;
 
     private void Update()
     {
@@ -42,7 +44,13 @@ public class InventoryItem : MonoBehaviour
                 AnchorPoint anchorPoint = anchorPoints.GetChild(i).GetComponent<AnchorPoint>();
                 if (anchorPoint.IsColliding())
                 {
-                    collidingPoints++;
+                    InventoryCell collidingCell = anchorPoint.GetColliderPosition().GetComponent<InventoryCell>();
+
+                    if (collidingCell.isOccupied == false)
+                    {
+                        collidingPoints++;
+                        collidingCell.isOccupied = true;
+                    }
                 }
             }
 
@@ -51,17 +59,51 @@ public class InventoryItem : MonoBehaviour
                 isDragging = !isDragging;
 
                 AnchorPoint anchorPoint = anchorPoints.GetChild(0).GetComponent<AnchorPoint>();
-                Vector3 offset = anchorPoints.GetChild(0).transform.position - transform.position; //get the first anchor point 
+                //Vector3 offset = anchorPoints.GetChild(0).transform.position - transform.position; //get the first anchor point 
                 Vector3 targetPosition = anchorPoint.GetColliderPosition().localPosition;
-                transform.localPosition = targetPosition - offset;
+                //transform.localPosition = targetPosition - offset;
 
-                Debug.Log("Placed @ " + Time.time);
+                SnapToGrid(targetPosition);
+
                 return;
             }
+            else
+            {
+                //check to see if we're placing it in the discard area here
+                return; //cant be placed, keep dragging
+            }
         }
-
-
-
+        else //if we're picking up the item to move
+        {
+            for (int i = 0; i < anchorPoints.childCount; i++)
+            {
+                AnchorPoint anchorPoint = anchorPoints.GetChild(i).GetComponent<AnchorPoint>();
+                if (anchorPoint.IsColliding())
+                {
+                    InventoryCell collidingCell = anchorPoint.GetColliderPosition().GetComponent<InventoryCell>();
+                    collidingCell.isOccupied = false;
+                }
+            }
+        }
         isDragging = !isDragging;
+    }
+
+    public bool GetIsInInventory()
+    {
+        return isInInventory;
+    }
+
+    public GameObject GetItemDropPrefab()
+    {
+        return itemDropPrefab;
+    }
+
+    public void SnapToGrid(Vector3 targetPosition)
+    {
+        Vector3 offset = anchorPoints.GetChild(0).transform.position - transform.position; //get the first anchor point 
+
+        transform.localPosition = targetPosition - offset;
+
+        Debug.Log("Placed @ " + Time.time);
     }
 }

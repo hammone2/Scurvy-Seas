@@ -218,6 +218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zDepth: 0
   anchorPoints: {fileID: 4455909374358218762}
+  itemDropPrefab: {fileID: 7454156401767476119, guid: 4574a96c7aa81654589a33f83d1cfbd2, type: 3}
 --- !u!54 &8064556001226508663
 Rigidbody:
   m_ObjectHideFlags: 0

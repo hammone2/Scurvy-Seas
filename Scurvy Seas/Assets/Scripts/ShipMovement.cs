@@ -17,6 +17,8 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
     private List<NavMeshAgent> agentsOnShip = new List<NavMeshAgent>();
     private PlayerManager playerManager; //might change this to a conroller base class that AIShip and PlayerManager inherit from
 
+    [SerializeField] private Transform itemDisposal;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -106,5 +108,11 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void ThrowItemOverboard(GameObject item)
+    {
+        item.GetComponent<ItemDrop>().DropItem();
+        item.transform.position = itemDisposal.position;
     }
 }

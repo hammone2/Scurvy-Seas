@@ -26,6 +26,13 @@ public class PlayerManager : MonoBehaviour
     private float rayCastMaxDist = 777f;
 
     private bool isInventoryOpen = false;
+    public InventorySystem inventorySystem;
+
+
+    //item pickup stuff
+    [SerializeField] private GameObject itemDropSearcherPrefab;
+    private ItemDropSearcher itemDropSearcher;
+
 
     private void Awake()
     {
@@ -36,6 +43,9 @@ public class PlayerManager : MonoBehaviour
     {
         playerCamera = Camera.main;
         playerShip.SetPlayerManager(this);
+
+        GameObject searcher = Instantiate(itemDropSearcherPrefab, playerShip.transform);
+        itemDropSearcher = searcher.GetComponent<ItemDropSearcher>();
     }
 
     private void Update()

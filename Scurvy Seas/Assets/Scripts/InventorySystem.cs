@@ -1,15 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class InventorySystem : MonoBehaviour
 {
-
     [SerializeField] Vector2Int size = new Vector2Int(3, 3);
     [SerializeField] float cellSize = 2f;
     [SerializeField] float spacing = 0.1f;
 
     private List<GameObject> cells = new List<GameObject>();
-    private bool isActive = false;
     [SerializeField] private GameObject cellPrefab;
     [SerializeField] private Transform cellContainer;
     [SerializeField] private Transform itemContainer;
@@ -73,9 +72,65 @@ public class InventorySystem : MonoBehaviour
         return size;
     }
 
-    public void ToggleInventory()
+    public void ToggleInventory() //we're just toggling the rotation of the camera so the inventory is still active
     {
-        isActive = !isActive;
-        gameObject.SetActive(isActive);
+        Transform camera = PlayerManager.instance.inventoryCamera.transform;
+        float currentYRot = camera.eulerAngles.y;
+
+        if (currentYRot == 0f)
+        {
+            camera.eulerAngles = new Vector3(camera.eulerAngles.x, 180f, camera.eulerAngles.z);
+        }
+        else
+        {
+            camera.eulerAngles = new Vector3(camera.eulerAngles.x, 0f, camera.eulerAngles.z);
+        }
+    }
+
+    public bool IsFreeCells()
+    {
+        for (int i = 0; i < cells.Count; i++)
+        {
+            InventoryCell cell = cells[i].GetComponent<InventoryCell>();
+            if (!cell.isOccupied)
+            {
+                return true; //we found a vacant cell
+            }
+        }
+        return false;
+    }
+
+    public void AddItem(GameObject newItem)
+    {
+        //check for first avaliable vacant cell
+        for (int i = 0; i < cells.Count; i++)
+        {
+            InventoryCell cell = cells[i].GetComponent<InventoryCell>();
+            if (!cell.isOccupied)
+            {
+                //instance the new item and snap it to the cell
+                InventoryItem inventoryItem = Instantiate(newItem, itemContainer).GetComponent<InventoryItem>();
+                inventoryItem.SnapToGrid(cell.transform.localPosition);
+                cell.isOccupied = true;
+                return; //we found a vacant cell
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) //this is temporary until i make a proper disposal area
+    {
+        if (other.CompareTag("Item"))
+        {
+            InventoryItem inventoryItem = other.GetComponent<InventoryItem>();
+            RemoveItem(inventoryItem);
+        }
+    }
+
+    public void RemoveItem(InventoryItem inventoryItem)
+    {
+        GameObject itemDrop = Instantiate(inventoryItem.GetItemDropPrefab());
+        PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
+
+        Destroy(inventoryItem.gameObject);
     }
 }
