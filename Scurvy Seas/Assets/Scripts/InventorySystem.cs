@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class InventorySystem : MonoBehaviour
 {
