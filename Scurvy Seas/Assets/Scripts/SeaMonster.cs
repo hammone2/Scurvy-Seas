@@ -34,8 +34,8 @@ public class SeaMonster : MonoBehaviour, IKillable
 
 
 
-        if (!hasJustFired)
-            FireCannon();
+        //if (!hasJustFired)
+            //FireCannon();
     }
 
     private void FireCannon()

@@ -9,6 +9,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float launchForce = 50f;
     [SerializeField] private Transform projectileSpawner;
+    [SerializeField] private LayerMask layersToHit;
 
     private void Update()
     {
@@ -21,6 +22,13 @@ public class Cannon : MonoBehaviour
 
     private void FireCannon()
     {
+        RaycastHit hit;
+        if (!Physics.Raycast(projectileSpawner.position, projectileSpawner.forward, out hit, 100f, layersToHit))
+            return;
+
+        if (!hit.collider.CompareTag("Enemy"))
+            return;
+
         hasJustFired = true;
 
         //temporary spawning code, use object pool later
