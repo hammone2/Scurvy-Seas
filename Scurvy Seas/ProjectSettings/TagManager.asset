@@ -8,6 +8,7 @@ TagManager:
   - CellCollider
   - AnchorPointCollider
   - ItemDrop
+  - Enemy
   layers:
   - Default
   - TransparentFX
