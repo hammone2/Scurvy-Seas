@@ -67,7 +67,6 @@ public class Task : MonoBehaviour
                 SetManned(true, crewmate);
 
             crewmatesInArea.Add(crewmate);
-            Debug.Log(crewmatesInArea.Count);
         }
     }
 
@@ -81,7 +80,6 @@ public class Task : MonoBehaviour
                 SetManned(false, crewmate);
 
             crewmatesInArea.Remove(crewmate);
-            Debug.Log(crewmatesInArea.Count);
 
             if (crewmatesInArea.Count == 0)
                 return;
