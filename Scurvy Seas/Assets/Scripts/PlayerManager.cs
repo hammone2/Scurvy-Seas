@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject wheelDisabledUI;
     [SerializeField] GameObject sailsDisabledUI;
     [SerializeField] Healthbar healthBar;
+    [SerializeField] GameObject nextLevelButton;
 
     public ShipMovement playerShip;
 
@@ -157,5 +158,10 @@ public class PlayerManager : MonoBehaviour
     public void SetIsInventoryOpen()
     {
         isInventoryOpen = !isInventoryOpen;
+    }
+
+    public void ActivateNextLevelButton()
+    {
+        nextLevelButton.SetActive(true);
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SeaMonster : MonoBehaviour, IKillable
+public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster/enemy class that I can use to make enemy ships and monsters
 {
     [SerializeField] private GameObject projectile;
     [SerializeField] private Transform projectileSpawner;
@@ -18,6 +18,7 @@ public class SeaMonster : MonoBehaviour, IKillable
     private void Start()
     {
         player = PlayerManager.instance.playerShip.transform;
+        LevelManager.instance.AddEnemy(gameObject);
     }
 
 
@@ -59,6 +60,7 @@ public class SeaMonster : MonoBehaviour, IKillable
     {
         Instantiate(itemDrop);
         itemDrop.transform.position = transform.position;
+        LevelManager.instance.RemoveEnemy(gameObject);
         Destroy(gameObject);
     }
 }
