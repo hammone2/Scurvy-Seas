@@ -68,6 +68,15 @@ public class PlayerManager : MonoBehaviour
         {
             MoveToMouseClick();
         }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            SaveData data = SaveManager.LoadGame();
+            if (data != null)
+            {
+                playerShip.Load(data);
+            }
+        }
     }
 
     public void HandleSteer(int direction)
