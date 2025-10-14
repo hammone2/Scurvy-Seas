@@ -694,7 +694,7 @@ MonoBehaviour:
     m_Bits: 64
   clickableLayers:
     serializedVersion: 2
-    m_Bits: 136
+    m_Bits: 392
   wheelDisabledUI: {fileID: 1574815962}
   sailsDisabledUI: {fileID: 1880090058}
   healthBar: {fileID: 972162308}

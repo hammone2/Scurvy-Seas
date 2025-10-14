@@ -2,17 +2,44 @@ using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
-    [HideInInspector] public bool canBePickedUp = true;
-    public GameObject inventoryItemPrefab;
-
-    public void DropItem()
+    [SerializeField] private Outline outline;
+    
+    private bool _canBePickedUp;
+    public bool canBePickedUp
     {
-        canBePickedUp = false;
-        Invoke("MakePickupable", 1f);
+        get { return _canBePickedUp; }
+        set 
+        {
+            if (value == _canBePickedUp) return;
+            _canBePickedUp = value;
+
+            if (_canBePickedUp)
+                outline.OutlineWidth = 5f;
+            else
+                outline.OutlineWidth = 2f;
+        }
     }
 
-    private void MakePickupable()
+    public GameObject inventoryItemPrefab;
+
+    private void Start()
     {
-        canBePickedUp = true;
+        canBePickedUp = false;
+    }
+
+    public void PickUpItem()
+    {
+        if (!canBePickedUp)
+            return;
+
+        //create inventory item and add to inventory
+        InventorySystem inventory = PlayerManager.instance.inventorySystem;
+
+        if (!inventory.IsFreeCells()) //are there free cells?
+            return;
+
+        inventory.AddItem(inventoryItemPrefab);
+
+        Destroy(gameObject);
     }
 }
