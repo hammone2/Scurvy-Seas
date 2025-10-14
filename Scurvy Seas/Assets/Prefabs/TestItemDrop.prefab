@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 7937391336103905709}
   - component: {fileID: 7511851230100641275}
   - component: {fileID: 3846644088383515508}
+  - component: {fileID: 5512824517660660200}
+  - component: {fileID: 4556683029956454181}
   m_Layer: 8
   m_Name: TestItemDrop
   m_TagString: ItemDrop
@@ -149,5 +151,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a8c0327e4e6cc4fb59645bfbcd49d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePickedUp: 1
+  outline: {fileID: 4556683029956454181}
+  canBePickedUp: 0
   inventoryItemPrefab: {fileID: 6618511528484817812, guid: d0579c9cb701ddc4b929d191171b7b78, type: 3}
+--- !u!114 &5512824517660660200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454156401767476119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61320ce8d329ed8458a7e4755134aff0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnClicked:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3846644088383515508}
+        m_TargetAssemblyTypeName: ItemDrop, Assembly-CSharp
+        m_MethodName: PickUpItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4556683029956454181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7454156401767476119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

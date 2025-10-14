@@ -8,18 +8,17 @@ public class ItemDropSearcher : MonoBehaviour
         {
             ItemDrop itemDrop = other.GetComponent<ItemDrop>();
 
-            if (itemDrop.canBePickedUp)
-            {
-                //create inventory item and add to inventory
-                InventorySystem inventory = PlayerManager.instance.inventorySystem;
+            itemDrop.canBePickedUp = true;
+        }
+    }
 
-                if (!inventory.IsFreeCells()) //are there free cells?
-                    return;
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("ItemDrop"))
+        {
+            ItemDrop itemDrop = other.GetComponent<ItemDrop>();
 
-                inventory.AddItem(itemDrop.inventoryItemPrefab);
-
-                Destroy(other.gameObject);
-            }
+            itemDrop.canBePickedUp = false;
         }
     }
 }

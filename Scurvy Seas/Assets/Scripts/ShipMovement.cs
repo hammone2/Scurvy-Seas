@@ -117,7 +117,6 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
 
     public void ThrowItemOverboard(GameObject item)
     {
-        item.GetComponent<ItemDrop>().DropItem();
         item.transform.position = itemDisposal.position;
     }
 
