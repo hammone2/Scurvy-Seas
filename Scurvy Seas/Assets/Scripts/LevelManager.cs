@@ -11,12 +11,23 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
+        //SaveSystem.Load();
         instance = this;
     }
 
     public void NextEncounter()
     {
-        //reload the scene
+        SaveData saveData = new SaveData
+        {
+            PlayerShip = PlayerManager.instance.playerShip.Save()
+        };
+        SaveManager.SaveGame(saveData);
+
+        Invoke("LoadNextScene", 2f);
+    }
+
+    private void LoadNextScene()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

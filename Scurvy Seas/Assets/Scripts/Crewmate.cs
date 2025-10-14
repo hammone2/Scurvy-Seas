@@ -96,4 +96,9 @@ public class Crewmate : MonoBehaviour
     {
         PlayerManager.instance.SetSelectedCrewmate(this);
     }
+
+    public GameObject GetNavPoint()
+    {
+        return navPoint;
+    }
 }

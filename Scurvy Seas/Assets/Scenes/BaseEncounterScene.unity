@@ -4073,6 +4073,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 276095845518873137, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
+      propertyPath: crewmatePrefab
+      value: 
+      objectReference: {fileID: 3569671488068865340, guid: 0e29ad70cd9d08647a0b469bdd72527d, type: 3}
     - target: {fileID: 1311990959138643761, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
       propertyPath: layersToHit.m_Bits
       value: 4294967295
