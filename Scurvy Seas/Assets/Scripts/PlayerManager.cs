@@ -75,6 +75,7 @@ public class PlayerManager : MonoBehaviour
             if (data != null)
             {
                 playerShip.Load(data);
+                inventorySystem.Load(data);
             }
         }
     }

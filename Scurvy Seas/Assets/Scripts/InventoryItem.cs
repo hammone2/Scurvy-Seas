@@ -8,6 +8,8 @@ public class InventoryItem : MonoBehaviour
     [SerializeField] Transform anchorPoints;
     [SerializeField] GameObject itemDropPrefab;
 
+    public string prefabPath;
+
     private void Update()
     {
         if (isDragging)
