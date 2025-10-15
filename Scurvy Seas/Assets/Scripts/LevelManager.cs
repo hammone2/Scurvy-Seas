@@ -19,7 +19,8 @@ public class LevelManager : MonoBehaviour
     {
         SaveData saveData = new SaveData
         {
-            PlayerShip = PlayerManager.instance.playerShip.Save()
+            PlayerShip = PlayerManager.instance.playerShip.Save(),
+            Inventory = PlayerManager.instance.inventorySystem.Save()
         };
         SaveManager.SaveGame(saveData);
 

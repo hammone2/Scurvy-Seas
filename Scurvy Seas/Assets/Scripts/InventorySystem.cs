@@ -12,6 +12,8 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private Transform cellContainer;
     [SerializeField] private Transform itemContainer;
 
+    private List<InventoryItem> items = new List<InventoryItem>();
+
     private void Start()
     {
         ArrangeCells();
@@ -111,6 +113,7 @@ public class InventorySystem : MonoBehaviour
                 InventoryItem inventoryItem = Instantiate(newItem, itemContainer).GetComponent<InventoryItem>();
                 inventoryItem.SnapToGrid(cell.transform.localPosition);
                 cell.isOccupied = true;
+                items.Add(inventoryItem);
                 return; //we found a vacant cell
             }
         }
@@ -129,7 +132,51 @@ public class InventorySystem : MonoBehaviour
     {
         GameObject itemDrop = Instantiate(inventoryItem.GetItemDropPrefab());
         PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
-
+        items.Remove(inventoryItem);
         Destroy(inventoryItem.gameObject);
+    }
+
+    public InventoryData Save()
+    {
+        InventoryData inventoryData = new InventoryData();
+        inventoryData.Items = new InventoryItemData[items.Count];
+
+        for (int i = 0; i < items.Count; i++)
+        {
+            InventoryItemData newItem = new InventoryItemData();
+            InventoryItem item = items[i];
+            newItem.PrefabPath = item.prefabPath; //use asset bundles for this in future (resources becomes expensive)
+
+            newItem.Position = new float[]
+            {
+                item.transform.position.x,
+                item.transform.position.y,
+                item.transform.position.z
+            };
+
+            inventoryData.Items[i] = newItem;
+        }
+
+
+        return inventoryData;
+    }
+
+    public void Load(SaveData saveData)
+    {
+        InventoryData inventoryData = saveData.Inventory;
+
+        for (int i = 0; i < inventoryData.Items.Length; i++)
+        {
+            InventoryItemData itemData = inventoryData.Items[i];
+            GameObject itemPrefab = Resources.Load<GameObject>(itemData.PrefabPath); //use asset bundles for this in future (resources becomes expensive)
+            if (itemPrefab != null)
+            {
+                GameObject spawnedItem = Instantiate(itemPrefab, transform);
+                spawnedItem.transform.position = new Vector3(itemData.Position[0], itemData.Position[1], itemData.Position[2]);
+                
+                InventoryItem newItemClass = spawnedItem.GetComponent<InventoryItem>();
+                if (newItemClass) items.Add(newItemClass);
+            }
+        }
     }
 }
