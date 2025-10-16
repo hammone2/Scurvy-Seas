@@ -230,26 +230,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1434861376355280275}
     m_Modifications:
-    - target: {fileID: 366809669264742412, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1884746284351163374, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1890966222677197724, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4560211358193229962, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6738525150596836764, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7448118256999036485, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -258,9 +238,9 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8633527396309470750, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
-      propertyPath: m_Layer
-      value: 0
+    - target: {fileID: 7966141976544970713, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
+      propertyPath: m_text
+      value: Sea Monster
       objectReference: {fileID: 0}
     - target: {fileID: 8768883097345467125, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
       propertyPath: m_Pivot.x
@@ -345,10 +325,6 @@ PrefabInstance:
     - target: {fileID: 8775755317299985485, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
       propertyPath: m_Name
       value: HealthBarENTITY
-      objectReference: {fileID: 0}
-    - target: {fileID: 8775755317299985485, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
-      propertyPath: m_Layer
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9108962720347849184, guid: 84e154e5cc407fb44849e5a2dbe26645, type: 3}
       propertyPath: m_AnchorMax.x

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1890966222677197724}
   - component: {fileID: 3677228515966880964}
   - component: {fileID: 6201127511607414499}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: HealthBarENTITY
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -110,6 +110,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8768883097345467125}
     m_Modifications:
+    - target: {fileID: 1831559640166374832, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2572124050425136745, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -118,17 +122,29 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3692809072839638578, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4217203721086382540, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4217203721086382540, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4753591560097441824, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6829985806546779074, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829985806546779074, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7356770890603858823, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
       propertyPath: m_Pivot.x
@@ -208,6 +224,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7356770890603858823, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8909858615362064550, guid: 77a8232866126e34fa23e1f094eee2a5, type: 3}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
