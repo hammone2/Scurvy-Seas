@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
 
     private void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.instance.NextLevel(SceneManager.GetActiveScene().name);
     }
 
     public void AddEnemy(GameObject enemy)
