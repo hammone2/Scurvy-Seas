@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 7454156401767476119}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6, y: 0, z: 133.1}
+  m_LocalPosition: {x: -1.6, y: 0, z: 133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outline: {fileID: 4556683029956454181}
-  canBePickedUp: 0
   inventoryItemPrefab: {fileID: 6618511528484817812, guid: d0579c9cb701ddc4b929d191171b7b78, type: 3}
 --- !u!114 &5512824517660660200
 MonoBehaviour:

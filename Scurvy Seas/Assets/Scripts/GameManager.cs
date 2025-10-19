@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    private int levelIterations = 2;
+    private int levelIterations = 5;
     private int currentLevelIteration = 1;
 
 
@@ -32,5 +32,10 @@ public class GameManager : MonoBehaviour
         }
 
         SceneManager.LoadScene(levelName);
+    }
+
+    public int GetCurrentLevel()
+    {
+        return currentLevelIteration;
     }
 }

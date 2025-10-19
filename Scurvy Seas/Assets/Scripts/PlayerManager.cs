@@ -17,6 +17,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Healthbar healthBar;
     [SerializeField] GameObject nextLevelButton;
 
+    //Treasure map stuff
+    [SerializeField] GameObject mapUI;
+    [SerializeField] RectTransform[] mapPositions;
+    [SerializeField] RectTransform youAreHereIcon;
+
     public ShipMovement playerShip;
 
     [SerializeField] Crewmate selectedCrewmate;
@@ -47,6 +52,8 @@ public class PlayerManager : MonoBehaviour
 
         GameObject searcher = Instantiate(itemDropSearcherPrefab, playerShip.transform);
         itemDropSearcher = searcher.GetComponent<ItemDropSearcher>();
+
+        UpdateMap(GameManager.instance.GetCurrentLevel());
     }
 
     private void Update()
@@ -174,4 +181,15 @@ public class PlayerManager : MonoBehaviour
     {
         nextLevelButton.SetActive(true);
     }
+
+    public void ToggleMap()
+    {
+        mapUI.SetActive(!mapUI.activeInHierarchy);
+    }
+
+    public void UpdateMap(int pos)
+    {
+        pos -= 1;
+        youAreHereIcon.position = mapPositions[pos].position;
+    } 
 }
