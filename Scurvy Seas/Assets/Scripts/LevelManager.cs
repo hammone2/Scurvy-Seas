@@ -46,14 +46,20 @@ public class LevelManager : MonoBehaviour
 
     public void NextEncounter()
     {
-        SaveData saveData = new SaveData
-        {
-            PlayerShip = PlayerManager.instance.playerShip.Save(),
-            Inventory = PlayerManager.instance.inventorySystem.Save()
-        };
-        SaveManager.SaveGame(saveData);
+        SaveGame();
 
         Invoke("LoadNextScene", 2f);
+    }
+
+    public void Retreat()
+    {
+        SaveGame();
+        Invoke("MoveBackLevel", 1f);
+    }
+
+    private void MoveBackLevel()
+    {
+        GameManager.instance.Retreat();
     }
 
     private void LoadNextScene()
@@ -72,5 +78,15 @@ public class LevelManager : MonoBehaviour
 
         if (enemies.Count == 0)
             OnEncounterComplete?.Invoke();
+    }
+
+    private void SaveGame()
+    {
+        SaveData saveData = new SaveData
+        {
+            PlayerShip = PlayerManager.instance.playerShip.Save(),
+            Inventory = PlayerManager.instance.inventorySystem.Save()
+        };
+        SaveManager.SaveGame(saveData);
     }
 }

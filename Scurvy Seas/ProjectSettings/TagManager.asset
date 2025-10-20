@@ -9,6 +9,7 @@ TagManager:
   - AnchorPointCollider
   - ItemDrop
   - Enemy
+  - OutOfBounds
   layers:
   - Default
   - TransparentFX

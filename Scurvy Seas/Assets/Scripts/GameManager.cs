@@ -34,6 +34,14 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(levelName);
     }
 
+    public void Retreat()
+    {
+        if (currentLevelIteration > 1)
+            currentLevelIteration--;
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     public int GetCurrentLevel()
     {
         return currentLevelIteration;
