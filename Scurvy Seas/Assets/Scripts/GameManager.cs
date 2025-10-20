@@ -46,4 +46,15 @@ public class GameManager : MonoBehaviour
     {
         return currentLevelIteration;
     }
+
+    public void RestartGame()
+    {
+        currentLevelIteration = 1;
+        SceneManager.LoadScene("BaseEncounterScene");
+    }
+
+    public void EndGame()
+    {
+        SceneManager.LoadScene("GameOverScene");
+    }
 }

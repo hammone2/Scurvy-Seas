@@ -16,6 +16,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject sailsDisabledUI;
     [SerializeField] Healthbar healthBar;
     [SerializeField] GameObject nextLevelButton;
+    [SerializeField] GameObject deathScreenUI;
 
     //Treasure map stuff
     [SerializeField] GameObject mapUI;
@@ -191,5 +192,10 @@ public class PlayerManager : MonoBehaviour
     {
         pos -= 1;
         youAreHereIcon.position = mapPositions[pos].position;
-    } 
+    }
+    
+    public void ShowDeathScreen()
+    {
+        deathScreenUI.SetActive(true);
+    }
 }
