@@ -112,7 +112,8 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
 
     public void Die()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        GameManager.instance.EndGame();
     }
 
     public void ThrowItemOverboard(GameObject item)

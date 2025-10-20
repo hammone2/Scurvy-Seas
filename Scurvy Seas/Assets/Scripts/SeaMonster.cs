@@ -35,8 +35,8 @@ public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster
 
 
 
-        //if (!hasJustFired)
-            //FireCannon();
+        if (!hasJustFired)
+            FireCannon();
     }
 
     private void FireCannon()

@@ -1009,6 +1009,7 @@ MonoBehaviour:
   sailsDisabledUI: {fileID: 1880090058}
   healthBar: {fileID: 972162308}
   nextLevelButton: {fileID: 1627012241}
+  deathScreenUI: {fileID: 0}
   mapUI: {fileID: 2021863946}
   mapPositions:
   - {fileID: 222485827}
