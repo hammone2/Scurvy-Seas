@@ -58,8 +58,7 @@ public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster
 
     public void Die()
     {
-        Instantiate(itemDrop);
-        itemDrop.transform.position = transform.position;
+        Instantiate(itemDrop, transform.position, Quaternion.identity);
         LevelManager.instance.RemoveEnemy(gameObject);
         Destroy(gameObject);
     }
