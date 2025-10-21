@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3993830365126892318}
   - component: {fileID: 7113235659593541936}
   - component: {fileID: 5041327435801055580}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SeaMonsterProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}

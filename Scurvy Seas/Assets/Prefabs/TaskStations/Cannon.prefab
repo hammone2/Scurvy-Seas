@@ -261,4 +261,4 @@ MonoBehaviour:
   projectileSpawner: {fileID: 1227946711447447106}
   layersToHit:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 507

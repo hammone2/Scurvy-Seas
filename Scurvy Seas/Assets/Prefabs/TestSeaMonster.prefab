@@ -81,7 +81,7 @@ MonoBehaviour:
   projectile: {fileID: 252782960555022737, guid: 66c6577c51da92942b620f05d62d9822, type: 3}
   projectileSpawner: {fileID: 4955903672542051072}
   rotationSpeed: 22.5
-  fireRate: 1.5
+  fireRate: 3
   launchForce: 10
   itemDrop: {fileID: 7454156401767476119, guid: 4574a96c7aa81654589a33f83d1cfbd2, type: 3}
 --- !u!1 &8991091671892315403
