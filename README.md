@@ -14,3 +14,5 @@ v0.1.1 Changelog:
 - Bug Fixes:
   - Fixed bug where the player and enemy healthbars would decrease/increase if the player moved the camera horizontally.
   - Fixed bug where enemy Item Drops would spawn in locations where another enemy previously was at.
+  - Fixed bug where projectiles would obfuscate cannon vision, causing the cannon to not fire at the Sea Monster.
+
