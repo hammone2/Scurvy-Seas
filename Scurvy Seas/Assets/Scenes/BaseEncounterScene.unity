@@ -5081,6 +5081,10 @@ PrefabInstance:
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 972162308}
+    - target: {fileID: 6948434414308813949, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
+      propertyPath: HealthValue
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7801556347623082449, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
       propertyPath: m_Enabled
       value: 1
