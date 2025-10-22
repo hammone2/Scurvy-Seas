@@ -22,6 +22,8 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
     [SerializeField] private Transform itemDisposal;
     [SerializeField] private GameObject crewmatePrefab;
 
+    [SerializeField] private Damagable damagableComponent;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -112,7 +114,6 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
 
     public void Die()
     {
-        //Destroy(gameObject);
         GameManager.instance.EndGame();
     }
 
@@ -142,7 +143,7 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
             shipData.Crewmates[i] = newCrewmate;
         }
 
-        shipData.ShipHealth = 0f; //placeholder value
+        shipData.ShipHealth = damagableComponent.health;
 
         return shipData;
     }
@@ -177,6 +178,6 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
             }
         }
 
-        //do health here
+        damagableComponent.health = shipData.ShipHealth;
     }
 }

@@ -4,13 +4,35 @@ using UnityEngine.Events;
 //[RequireComponent(typeof(Collider))]
 public class Damagable : MonoBehaviour
 {
-    public float health;
+    [SerializeField] private float HealthValue = 100f;
+
+    private float _health;
+    public float health
+    {
+        get { return _health; }
+        set
+        {
+            if (value == _health) return;
+
+            _health = value;
+
+            if (healthBar != null)
+            {
+                healthBar.UpdateHealth(health);
+            }
+
+            Debug.Log(health);
+        }
+    }
+
+
     public UnityEvent OnDeath;
     [SerializeField] private Healthbar healthBar;
 
 
     private void Start()
     {
+        health = HealthValue;
         if (healthBar != null)
             healthBar.InitializeHealth(health);
     }
@@ -21,9 +43,6 @@ public class Damagable : MonoBehaviour
             return;
 
         health -= damage;
-        if (healthBar != null)
-            healthBar.UpdateHealth(health);
-        Debug.Log(health);
 
         if (health <= 0)
             OnDeath?.Invoke();
