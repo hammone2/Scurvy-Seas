@@ -151,8 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a8c0327e4e6cc4fb59645bfbcd49d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSize: 1
   outline: {fileID: 4556683029956454181}
-  inventoryItemPrefab: {fileID: 6618511528484817812, guid: d0579c9cb701ddc4b929d191171b7b78, type: 3}
+  inventoryItemPrefab: {fileID: 5894422697024669654, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
 --- !u!114 &5512824517660660200
 MonoBehaviour:
   m_ObjectHideFlags: 0
