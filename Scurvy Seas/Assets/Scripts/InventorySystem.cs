@@ -14,7 +14,7 @@ public class InventorySystem : MonoBehaviour
 
     private List<InventoryItem> items = new List<InventoryItem>();
 
-    private void Start()
+    private void Awake()
     {
         ArrangeCells();
     }
@@ -140,6 +140,7 @@ public class InventorySystem : MonoBehaviour
     {
         InventoryData inventoryData = new InventoryData();
         inventoryData.Items = new InventoryItemData[items.Count];
+        inventoryData.Cells = new InventoryCellData[cells.Count];
 
         for (int i = 0; i < items.Count; i++)
         {
@@ -155,6 +156,16 @@ public class InventorySystem : MonoBehaviour
             };
 
             inventoryData.Items[i] = newItem;
+        }
+
+        for (int i = 0; i < cells.Count; i++)
+        {
+            InventoryCellData newCell = new InventoryCellData();
+            InventoryCell cell = cells[i].GetComponent<InventoryCell>();
+            
+            newCell.isOccupied = cell.isOccupied;
+            
+            inventoryData.Cells[i] = newCell;
         }
 
 
@@ -177,6 +188,11 @@ public class InventorySystem : MonoBehaviour
                 InventoryItem newItemClass = spawnedItem.GetComponent<InventoryItem>();
                 if (newItemClass) items.Add(newItemClass);
             }
+        }
+
+        for (int i = 0; i < cells.Count; i++)
+        {
+            cells[i].GetComponent<InventoryCell>().isOccupied = inventoryData.Cells[i].isOccupied;
         }
     }
 }
