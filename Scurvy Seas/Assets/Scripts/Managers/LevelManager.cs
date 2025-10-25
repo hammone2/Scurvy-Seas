@@ -14,7 +14,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        //SaveSystem.Load();
         instance = this;
     }
 
