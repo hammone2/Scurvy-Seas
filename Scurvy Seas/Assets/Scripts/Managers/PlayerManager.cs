@@ -55,9 +55,6 @@ public class PlayerManager : MonoBehaviour
         itemDropSearcher = searcher.GetComponent<ItemDropSearcher>();
 
         UpdateMap(GameManager.instance.GetCurrentLevel());
-
-
-        Invoke("Load", 1f);
     }
 
     private void Update()
@@ -79,16 +76,6 @@ public class PlayerManager : MonoBehaviour
         {
             MoveToMouseClick();
         }
-
-        /*if (Input.GetKeyDown(KeyCode.L))
-        {
-            SaveData data = SaveManager.LoadGame();
-            if (data != null)
-            {
-                playerShip.Load(data);
-                inventorySystem.Load(data);
-            }
-        }*/
     }
 
     public void HandleSteer(int direction)
@@ -200,15 +187,5 @@ public class PlayerManager : MonoBehaviour
     public void ShowDeathScreen()
     {
         deathScreenUI.SetActive(true);
-    }
-
-    private void Load() //put savemanager in here
-    {
-        SaveData data = SaveManager.LoadGame();
-        if (data != null)
-        {
-            playerShip.Load(data);
-            inventorySystem.Load(data);
-        }
     }
 }
