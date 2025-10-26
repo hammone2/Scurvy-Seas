@@ -41,6 +41,9 @@ public class LevelManager : MonoBehaviour
             GameObject randomEnemy = Instantiate(enemyPrefabs[randomEnemyIndex], 
                 enemySpawnPoints[spawnPointIndex].position, Quaternion.identity);
         }
+
+        if (!GameManager.instance.isNewGame)
+            Invoke("LoadGame", 1f);
     }
 
     public void NextEncounter()
@@ -87,5 +90,15 @@ public class LevelManager : MonoBehaviour
             Inventory = PlayerManager.instance.inventorySystem.Save()
         };
         SaveManager.SaveGame(saveData);
+    }
+
+    private void LoadGame()
+    {
+        SaveData saveData = SaveManager.LoadGame();
+        if (saveData != null)
+        {
+            PlayerManager.instance.playerShip.Load(saveData);
+            PlayerManager.instance.inventorySystem.Load(saveData);
+        }
     }
 }
