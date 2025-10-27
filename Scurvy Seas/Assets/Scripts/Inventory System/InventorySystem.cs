@@ -1,16 +1,24 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class InventorySystem : MonoBehaviour
 {
     [SerializeField] private Transform inventoryContent;
     [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject itemInfo;
+    [SerializeField] private TextMeshProUGUI itemNameInfo;
     public int storageSize = 100;
     [HideInInspector] public int currentStorageUsed = 0;
     private List<InventoryItem> items = new List<InventoryItem>();
+    private InventoryItem selectedItem;
 
-    public void ToggleInventory() //we're just toggling the rotation of the camera so the inventory is still active
+    private GameObject displayItem;
+    [SerializeField] private Transform itemDisplayArea;
+
+    public void ToggleInventory()
     {
+        PlayerManager.instance.inventoryCamera.gameObject.SetActive(!inventoryUI.activeInHierarchy);
         inventoryUI.SetActive(!inventoryUI.activeInHierarchy);
     }
 
@@ -29,6 +37,14 @@ public class InventorySystem : MonoBehaviour
         items.Add(inventoryItem);
 
         currentStorageUsed += inventoryItem.itemSize;
+    }
+
+    public void DropItemButtonClicked()
+    {
+        if (selectedItem == null)
+            return;
+
+        RemoveItem(selectedItem);
     }
 
     public void RemoveItem(InventoryItem inventoryItem)
@@ -68,5 +84,23 @@ public class InventorySystem : MonoBehaviour
             if (itemPrefab != null)
                 AddItem(itemPrefab);
         }
+    }
+
+    public void DisplayItem(InventoryItem item)
+    {
+        if (items.Count == 0)
+            return;
+
+        if (displayItem != null)
+            Destroy(displayItem);
+
+        selectedItem = item;
+
+        displayItem = Instantiate(item.GetItemDropPrefab(), itemDisplayArea.position, Quaternion.identity);
+        displayItem.GetComponent<ItemDrop>().canBePickedUp = false;
+        displayItem.GetComponent<Outline>().enabled = false;
+        displayItem.layer = LayerMask.NameToLayer("Inventory");
+
+        itemNameInfo.SetText(item.name);
     }
 }

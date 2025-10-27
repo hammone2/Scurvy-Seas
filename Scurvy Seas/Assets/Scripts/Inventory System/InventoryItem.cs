@@ -11,4 +11,9 @@ public class InventoryItem : MonoBehaviour
     {
         return itemDropPrefab;
     }
+
+    public void OnItemClicked()
+    {
+        PlayerManager.instance.inventorySystem.DisplayItem(this);
+    }
 }
