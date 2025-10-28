@@ -24,7 +24,9 @@ public class InventorySystem : MonoBehaviour
 
     public void ToggleInventory()
     {
-        PlayerManager.instance.inventoryCamera.gameObject.SetActive(!inventoryUI.activeInHierarchy);
+        if (PlayerManager.instance != null)
+            PlayerManager.instance.inventoryCamera.gameObject.SetActive(!inventoryUI.activeInHierarchy);
+
         inventoryUI.SetActive(!inventoryUI.activeInHierarchy);
     }
 
