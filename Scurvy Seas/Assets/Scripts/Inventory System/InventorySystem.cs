@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using static UnityEditor.Progress;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -51,8 +53,24 @@ public class InventorySystem : MonoBehaviour
     {
         GameObject itemDrop = Instantiate(inventoryItem.GetItemDropPrefab());
         PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
+        DeleteItem(inventoryItem);
+    }
+
+    public void DeleteItem(InventoryItem inventoryItem)
+    {
         items.Remove(inventoryItem);
         Destroy(inventoryItem.gameObject);
+    }
+
+    public T FindFirstItemOfClass<T>() where T : Component
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            T component = items[i].GetComponent<T>();
+            if (component != null) return component;
+        }
+
+        return null; //nothing found
     }
 
     public InventoryData Save()
@@ -65,6 +83,9 @@ public class InventorySystem : MonoBehaviour
             InventoryItemData newItem = new InventoryItemData();
             InventoryItem item = items[i];
             newItem.PrefabPath = item.prefabPath; //use asset bundles for this in future (resources becomes expensive)
+
+            if (item.isStackable)
+                newItem.Stack = item.stack;
 
             inventoryData.Items[i] = newItem;
         }
@@ -80,9 +101,17 @@ public class InventorySystem : MonoBehaviour
         {
             InventoryItemData itemData = inventoryData.Items[i];
             GameObject itemPrefab = Resources.Load<GameObject>(itemData.PrefabPath); //use asset bundles for this in future (resources becomes expensive)
-            
+
             if (itemPrefab != null)
-                AddItem(itemPrefab);
+            {
+                InventoryItem inventoryItem = Instantiate(itemPrefab, inventoryContent).GetComponent<InventoryItem>();
+                items.Add(inventoryItem);
+
+                if (inventoryItem.isStackable)
+                    inventoryItem.SetStack(itemData.Stack);
+
+                currentStorageUsed += inventoryItem.itemSize;
+            }
         }
     }
 

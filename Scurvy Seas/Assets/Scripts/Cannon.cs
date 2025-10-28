@@ -29,6 +29,12 @@ public class Cannon : MonoBehaviour
         if (!hit.collider.CompareTag("Enemy"))
             return;
 
+        //do we have cannonballs?
+        InventorySystem inventory = PlayerManager.instance.inventorySystem;
+        CannonballItem cannonballItem = inventory.FindFirstItemOfClass<CannonballItem>();
+        if (cannonballItem == null)
+            return;
+
         hasJustFired = true;
 
         //temporary spawning code, use object pool later
@@ -37,6 +43,10 @@ public class Cannon : MonoBehaviour
             ball.GetComponent<Rigidbody>().AddForce(projectileSpawner.forward * launchForce, ForceMode.VelocityChange); //implement a range calculation later using the salvaged steel artillery code
 
         Invoke("CoolDown", fireRate);
+
+        InventoryItem item = cannonballItem.GetComponent<InventoryItem>();
+        int stackValue = item.stack - 1;
+        item.SetStack(stackValue);
     }
 
     private void CoolDown()

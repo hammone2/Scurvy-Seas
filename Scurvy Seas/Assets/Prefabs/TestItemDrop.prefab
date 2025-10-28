@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSize: 1
   outline: {fileID: 4556683029956454181}
-  inventoryItemPrefab: {fileID: 5894422697024669654, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+  inventoryItemPrefab: {fileID: 7294972549149142497, guid: dba793a1ffecc7d4e8ecf4a2823cb92d, type: 3}
 --- !u!114 &5512824517660660200
 MonoBehaviour:
   m_ObjectHideFlags: 0
