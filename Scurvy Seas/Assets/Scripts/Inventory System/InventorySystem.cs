@@ -8,6 +8,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject itemInfo;
     [SerializeField] private TextMeshProUGUI itemNameInfo;
+    [SerializeField] private TextMeshProUGUI currentStorageText;
     public int storageSize = 100;
     [HideInInspector] public int currentStorageUsed = 0;
     private List<InventoryItem> items = new List<InventoryItem>();
@@ -15,6 +16,11 @@ public class InventorySystem : MonoBehaviour
 
     private GameObject displayItem;
     [SerializeField] private Transform itemDisplayArea;
+
+    private void Start()
+    {
+        UpdateStorageText();
+    }
 
     public void ToggleInventory()
     {
@@ -37,6 +43,7 @@ public class InventorySystem : MonoBehaviour
         items.Add(inventoryItem);
 
         currentStorageUsed += inventoryItem.itemSize;
+        UpdateStorageText();
     }
 
     public void DropItemButtonClicked()
@@ -51,7 +58,15 @@ public class InventorySystem : MonoBehaviour
     {
         GameObject itemDrop = Instantiate(inventoryItem.GetItemDropPrefab());
         PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
+        
+        currentStorageUsed -= inventoryItem.itemSize;
         DeleteItem(inventoryItem);
+        UpdateStorageText();
+    }
+
+    private void UpdateStorageText()
+    {
+        currentStorageText.SetText(currentStorageUsed.ToString() + "/" + storageSize);
     }
 
     public void DeleteItem(InventoryItem inventoryItem)
@@ -109,6 +124,7 @@ public class InventorySystem : MonoBehaviour
                     inventoryItem.SetStack(itemData.Stack);
 
                 currentStorageUsed += inventoryItem.itemSize;
+                UpdateStorageText();
             }
         }
     }
