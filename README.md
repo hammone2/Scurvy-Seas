@@ -1,18 +1,15 @@
 Play Here: https://hammone2.github.io/Scurvy-Seas/
 
-v0.1.1 Changelog:
+v0.1.2 Changelog:
 
 - New Features:
-  - Added Treasure Map that tracks game progress.
-  - The Player is now able to retreat when they sail to the edge of the level.
-  - Added basic tavern/port scene. The player visits port when they complete 5 encounters.
-  - Added inventory data to save file.
-  - Added random enemy spawns to the map.
-  - Added nametags to enemy and player healthbars.
-  - Added Game Over scene.
+  - Replaced grid-based inventory system with Skyrim-style inventory system.
+  - Added Title Screen.
+  - Added Cannonball Item.
+  - The game will now automatically load save data when progressing to the next level.
+  - Added Pirate font.
+  - Player Ship HP has been added to save data.
 
 - Bug Fixes:
-  - Fixed bug where the player and enemy healthbars would decrease/increase if the player moved the camera horizontally.
-  - Fixed bug where enemy Item Drops would spawn in locations where another enemy previously was at.
-  - Fixed bug where projectiles would obfuscate cannon vision, causing the cannon to not fire at the Sea Monster.
+  - N/A
 
