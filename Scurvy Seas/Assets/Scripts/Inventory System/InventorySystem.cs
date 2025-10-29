@@ -4,6 +4,8 @@ using TMPro;
 
 public class InventorySystem : MonoBehaviour
 {
+    public static InventorySystem instance;
+
     [SerializeField] private Transform inventoryContent;
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject itemInfo;
@@ -16,6 +18,11 @@ public class InventorySystem : MonoBehaviour
 
     private GameObject displayItem;
     [SerializeField] private Transform itemDisplayArea;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     private void Start()
     {
@@ -133,8 +140,8 @@ public class InventorySystem : MonoBehaviour
 
     public void DisplayItem(InventoryItem item)
     {
-        if (items.Count == 0)
-            return;
+        //if (items.Count == 0)
+            //return;
 
         if (displayItem != null)
             Destroy(displayItem);

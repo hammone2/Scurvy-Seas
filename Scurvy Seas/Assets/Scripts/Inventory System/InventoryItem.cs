@@ -24,7 +24,8 @@ public class InventoryItem : MonoBehaviour
 
     public void OnItemClicked()
     {
-        PlayerManager.instance.inventorySystem.DisplayItem(this);
+        InventorySystem.instance.DisplayItem(this);
+        //PlayerManager.instance.inventorySystem.DisplayItem(this);
     }
 
     public void SetStack(int value)
