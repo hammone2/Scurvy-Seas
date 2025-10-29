@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isNewGame = false;
-    private int levelIterations = 5;
+    private int levelIterations = 1;
     private int currentLevelIteration = 1;
 
 
