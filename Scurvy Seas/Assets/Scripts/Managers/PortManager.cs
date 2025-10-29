@@ -17,10 +17,10 @@ public class PortManager : MonoBehaviour
     public void LoadInventoryData()
     {
         SaveData saveData = SaveManager.LoadGame();
-        if (saveData != null)
-        {
-            InventorySystem.instance.Load(saveData);
-        }
+        if (saveData is null)
+            return;
+
+        InventorySystem.instance.Load(saveData);
     }
 
     public void SaveInventoryData()
