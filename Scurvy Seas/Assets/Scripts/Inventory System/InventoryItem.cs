@@ -7,6 +7,7 @@ public class InventoryItem : MonoBehaviour
 
     public string prefabPath;
     public int itemSize = 1;
+    public int itemValue = 1;
     public bool isStackable = false;
     public int stack = 0;
     [SerializeField] private TextMeshProUGUI stacktext;
@@ -25,7 +26,6 @@ public class InventoryItem : MonoBehaviour
     public void OnItemClicked()
     {
         InventorySystem.instance.DisplayItem(this);
-        //PlayerManager.instance.inventorySystem.DisplayItem(this);
     }
 
     public void SetStack(int value)

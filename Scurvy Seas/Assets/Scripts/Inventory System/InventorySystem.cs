@@ -10,6 +10,8 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject itemInfo;
     [SerializeField] private TextMeshProUGUI itemNameInfo;
+    [SerializeField] private TextMeshProUGUI itemSizeText;
+    [SerializeField] private TextMeshProUGUI itemValueText;
     [SerializeField] private TextMeshProUGUI currentStorageText;
     public int storageSize = 100;
     [HideInInspector] public int currentStorageUsed = 0;
@@ -23,6 +25,21 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject buyButton;
     [SerializeField] private GameObject sellButton;
     [SerializeField] private GameObject dropButton;
+
+    //Gold stuff
+    [SerializeField] private TextMeshProUGUI goldText;
+    private int _gold;
+    public int gold
+    {
+        set 
+        {
+            if (_gold == value) return;
+
+            _gold = value;
+            goldText.SetText(_gold.ToString());
+        }
+        get { return _gold; }
+    }
 
     private void Awake()
     {
@@ -132,6 +149,8 @@ public class InventorySystem : MonoBehaviour
             inventoryData.Items[i] = newItem;
         }
 
+        inventoryData.Gold = gold;
+
         return inventoryData;
     }
 
@@ -156,6 +175,8 @@ public class InventorySystem : MonoBehaviour
                 UpdateStorageText();
             }
         }
+
+        gold = inventoryData.Gold;
     }
 
     public void DisplayItem(InventoryItem item)
@@ -167,7 +188,7 @@ public class InventorySystem : MonoBehaviour
             Destroy(displayItem);
 
         selectedItem = item;
-
+        itemInfo.SetActive(true);
 
         if (isShopping)
         {
@@ -191,15 +212,15 @@ public class InventorySystem : MonoBehaviour
         displayItem.layer = LayerMask.NameToLayer("Inventory");
 
         itemNameInfo.SetText(item.name);
+        itemSizeText.SetText("Size: "+item.itemSize.ToString());
+        itemValueText.SetText("Value: "+item.itemValue.ToString());
     }
 
     public void RemoveDisplayItem()
     {
         Destroy(displayItem);
         selectedItem = null;
-        itemNameInfo.SetText("");
-        sellButton.SetActive(false);
-        buyButton.SetActive(false);
+        itemInfo.SetActive(false);
     }
 
     public InventoryItem GetSelectedItem()
