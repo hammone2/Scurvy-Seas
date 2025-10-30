@@ -1,27 +1,62 @@
+using TMPro;
 using UnityEngine;
 
 public class ItemShop : MonoBehaviour
 {
     [SerializeField] private Transform shopContent;
+    
+    //Gold stuff
+    [SerializeField] private TextMeshProUGUI goldText;
+    private int _gold;
+    public int gold
+    {
+        set
+        {
+            if (_gold == value) return;
+
+            _gold = value;
+            goldText.SetText(_gold.ToString());
+        }
+        get { return _gold; }
+    }
+
+    private void Start()
+    {
+        gold = Random.Range(100, 1000);
+    }
 
     public void BuyItem()
     {
-        InventoryItem item = InventorySystem.instance.GetSelectedItem();
+        InventorySystem inventory = InventorySystem.instance;
+        InventoryItem item = inventory.GetSelectedItem();
         if (!item)
             return;
 
-        InventorySystem.instance.AddItem(item);
-        item.transform.SetParent(InventorySystem.instance.GetInventoryContent());
-        InventorySystem.instance.DisplayItem(item);
+        if (inventory.gold - item.itemValue < 0)
+            return;
+
+        inventory.AddItem(item);
+        item.transform.SetParent(inventory.GetInventoryContent());
+        inventory.DisplayItem(item);
+
+        inventory.gold -= item.itemValue;
+        gold += item.itemValue;
     }
 
     public void SellItem()
     {
-        InventoryItem item = InventorySystem.instance.GetSelectedItem();
+        InventorySystem inventory = InventorySystem.instance;
+        InventoryItem item = inventory.GetSelectedItem();
         if (!item)
             return;
 
-        InventorySystem.instance.RemoveItem(item);
+        if (gold - item.itemValue < 0)
+            return;
+
+        inventory.RemoveItem(item);
         item.transform.SetParent(shopContent);
+
+        inventory.gold += item.itemValue;
+        gold -= item.itemValue;
     }
 }
