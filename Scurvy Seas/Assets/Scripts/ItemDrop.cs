@@ -39,7 +39,7 @@ public class ItemDrop : MonoBehaviour
         if (!inventory.HasEnoughStorage(itemSize)) //are there free cells?
             return;
 
-        inventory.AddItem(inventoryItemPrefab);
+        inventory.PickUpItem(inventoryItemPrefab);
 
         Destroy(gameObject);
     }

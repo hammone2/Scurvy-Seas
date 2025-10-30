@@ -19,6 +19,11 @@ public class InventorySystem : MonoBehaviour
     private GameObject displayItem;
     [SerializeField] private Transform itemDisplayArea;
 
+    [SerializeField] private bool isShopping = false;
+    [SerializeField] private GameObject buyButton;
+    [SerializeField] private GameObject sellButton;
+    [SerializeField] private GameObject dropButton;
+
     private void Awake()
     {
         instance = this;
@@ -27,6 +32,14 @@ public class InventorySystem : MonoBehaviour
     private void Start()
     {
         UpdateStorageText();
+
+        if (isShopping)
+            dropButton.SetActive(false);
+        else
+        {
+            sellButton.SetActive(false);
+            buyButton.SetActive(false);
+        }
     }
 
     public void ToggleInventory()
@@ -46,12 +59,18 @@ public class InventorySystem : MonoBehaviour
         return true;
     }
 
-    public void AddItem(GameObject newItem)
+    public void PickUpItem(GameObject newItem)
     {
-        InventoryItem inventoryItem = Instantiate(newItem, inventoryContent).GetComponent<InventoryItem>();
-        items.Add(inventoryItem);
+        GameObject pickedUpItem = Instantiate(newItem, inventoryContent);
+        InventoryItem inventoryItem = pickedUpItem.GetComponent<InventoryItem>();
+        AddItem(inventoryItem);
+    }
 
-        currentStorageUsed += inventoryItem.itemSize;
+    public void AddItem(InventoryItem item)
+    {
+        items.Add(item);
+
+        currentStorageUsed += item.itemSize;
         UpdateStorageText();
     }
 
@@ -60,16 +79,18 @@ public class InventorySystem : MonoBehaviour
         if (selectedItem == null)
             return;
 
+        GameObject itemDrop = Instantiate(selectedItem.GetItemDropPrefab());
+        PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
+
         RemoveItem(selectedItem);
+        DeleteItem(selectedItem);
     }
 
     public void RemoveItem(InventoryItem inventoryItem)
     {
-        GameObject itemDrop = Instantiate(inventoryItem.GetItemDropPrefab());
-        PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
-        
         currentStorageUsed -= inventoryItem.itemSize;
-        DeleteItem(inventoryItem);
+        items.Remove(inventoryItem);
+        RemoveDisplayItem();
         UpdateStorageText();
     }
 
@@ -80,7 +101,6 @@ public class InventorySystem : MonoBehaviour
 
     public void DeleteItem(InventoryItem inventoryItem)
     {
-        items.Remove(inventoryItem);
         Destroy(inventoryItem.gameObject);
     }
 
@@ -148,11 +168,47 @@ public class InventorySystem : MonoBehaviour
 
         selectedItem = item;
 
+
+        if (isShopping)
+        {
+            if (!items.Contains(selectedItem))
+            {
+                Debug.Log("This item can be bought");
+                buyButton.SetActive(true);
+                sellButton.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("This is your item");
+                buyButton.SetActive(false);
+                sellButton.SetActive(true);
+            }
+        }
+
         displayItem = Instantiate(item.GetItemDropPrefab(), itemDisplayArea.position, Quaternion.identity);
         displayItem.GetComponent<ItemDrop>().canBePickedUp = false;
         displayItem.GetComponent<Outline>().enabled = false;
         displayItem.layer = LayerMask.NameToLayer("Inventory");
 
         itemNameInfo.SetText(item.name);
+    }
+
+    public void RemoveDisplayItem()
+    {
+        Destroy(displayItem);
+        selectedItem = null;
+        itemNameInfo.SetText("");
+        sellButton.SetActive(false);
+        buyButton.SetActive(false);
+    }
+
+    public InventoryItem GetSelectedItem()
+    {
+        return selectedItem;
+    }
+
+    public Transform GetInventoryContent()
+    {
+        return inventoryContent;
     }
 }
