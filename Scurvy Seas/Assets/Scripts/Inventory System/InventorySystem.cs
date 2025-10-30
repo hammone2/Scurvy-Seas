@@ -204,8 +204,6 @@ public class InventorySystem : MonoBehaviour
 
     public InventoryItem GetSelectedItem()
     {
-        if (selectedItem == null)
-            return null;
         return selectedItem;
     }
 
