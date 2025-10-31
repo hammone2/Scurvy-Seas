@@ -57,6 +57,8 @@ public class InventorySystem : MonoBehaviour
             sellButton.SetActive(false);
             buyButton.SetActive(false);
         }
+
+        gold = 1000; //default starting value
     }
 
     public void ToggleInventory()
