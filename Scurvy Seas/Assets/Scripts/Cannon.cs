@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Cannon : MonoBehaviour
 {
@@ -8,8 +11,14 @@ public class Cannon : MonoBehaviour
     private bool hasJustFired = false;
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float launchForce = 50f;
+    [SerializeField] private Image reloadIndicator;
     [SerializeField] private Transform projectileSpawner;
     [SerializeField] private LayerMask layersToHit;
+
+    public float elapsedTime = 0f;
+    private bool isReloading = false;
+    private bool isLoaded = false;
+    private Coroutine reloadCoroutine;
 
     private void Update()
     {
@@ -30,8 +39,7 @@ public class Cannon : MonoBehaviour
             return;
 
         //do we have cannonballs?
-        InventorySystem inventory = PlayerManager.instance.inventorySystem;
-        CannonballItem cannonballItem = inventory.FindFirstItemOfClass<CannonballItem>();
+        CannonballItem cannonballItem = HasCannonBall();
         if (cannonballItem == null)
             return;
 
@@ -42,15 +50,58 @@ public class Cannon : MonoBehaviour
         if (ball.GetComponent<Rigidbody>())
             ball.GetComponent<Rigidbody>().AddForce(projectileSpawner.forward * launchForce, ForceMode.VelocityChange); //implement a range calculation later using the salvaged steel artillery code
 
-        Invoke("CoolDown", fireRate);
-
         InventoryItem item = cannonballItem.GetComponent<InventoryItem>();
         int stackValue = item.stack - 1;
         item.SetStack(stackValue);
+
+        reloadIndicator.fillAmount = 0f;
+        isLoaded = false;
+
+        //reload
+        if (!HasCannonBall())
+            return;
+
+        elapsedTime = 0;
+        reloadCoroutine = StartCoroutine(Reload());
     }
 
-    private void CoolDown()
+    private CannonballItem HasCannonBall()
     {
+        InventorySystem inventory = PlayerManager.instance.inventorySystem;
+        CannonballItem cannonballItem = inventory.FindFirstItemOfClass<CannonballItem>();
+        return cannonballItem;
+    }
+
+    private IEnumerator Reload()
+    {
+        isReloading = true;
+
+        while (elapsedTime < fireRate)
+        {
+            reloadIndicator.fillAmount = Mathf.Lerp(0f, 1f, elapsedTime / fireRate);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        reloadIndicator.fillAmount = 1;
         hasJustFired = false;
+        isReloading = false;
+        isLoaded = true;
+    }
+
+    public void PauseReload()
+    {
+        if (reloadCoroutine == null)
+            return;
+
+        StopCoroutine(reloadCoroutine);
+    }
+
+    public void ReadyTask()
+    {
+        if (!HasCannonBall())
+            return;
+
+        reloadCoroutine = StartCoroutine(Reload());
     }
 }
