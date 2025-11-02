@@ -128,7 +128,8 @@ public class InventorySystem : MonoBehaviour
         for (int i = 0; i < items.Count; i++)
         {
             T component = items[i].GetComponent<T>();
-            if (component != null) return component;
+            if (component != null)
+                return component;
         }
 
         return null; //nothing found
