@@ -11,6 +11,12 @@ public class Cannon : MonoBehaviour
     [SerializeField] private Transform projectileSpawner;
     [SerializeField] private LayerMask layersToHit;
 
+<<<<<<< Updated upstream
+=======
+    public float elapsedTime = 0f;
+    private Coroutine reloadCoroutine;
+
+>>>>>>> Stashed changes
     private void Update()
     {
         if (task.GetIsManned())
@@ -47,10 +53,57 @@ public class Cannon : MonoBehaviour
         InventoryItem item = cannonballItem.GetComponent<InventoryItem>();
         int stackValue = item.stack - 1;
         item.SetStack(stackValue);
+<<<<<<< Updated upstream
+=======
+
+        reloadIndicator.fillAmount = 0f;
+
+        //reload
+        if (!HasCannonBall())
+            return;
+
+        elapsedTime = 0;
+        reloadCoroutine = StartCoroutine(Reload());
+>>>>>>> Stashed changes
     }
 
     private void CoolDown()
     {
+<<<<<<< Updated upstream
         hasJustFired = false;
+=======
+        InventorySystem inventory = PlayerManager.instance.inventorySystem;
+        CannonballItem cannonballItem = inventory.FindFirstItemOfClass<CannonballItem>();
+        return cannonballItem;
+    }
+
+    private IEnumerator Reload()
+    {
+        while (elapsedTime < fireRate)
+        {
+            reloadIndicator.fillAmount = Mathf.Lerp(0f, 1f, elapsedTime / fireRate);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        reloadIndicator.fillAmount = 1;
+        hasJustFired = false;
+    }
+
+    public void PauseReload()
+    {
+        if (reloadCoroutine == null)
+            return;
+
+        StopCoroutine(reloadCoroutine);
+    }
+
+    public void ReadyTask()
+    {
+        if (!HasCannonBall())
+            return;
+
+        reloadCoroutine = StartCoroutine(Reload());
+>>>>>>> Stashed changes
     }
 }
