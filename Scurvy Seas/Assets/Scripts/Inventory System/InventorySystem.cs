@@ -25,6 +25,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject buyButton;
     [SerializeField] private GameObject sellButton;
     [SerializeField] private GameObject dropButton;
+    [SerializeField] private GameObject consumeButton;
 
     //Gold stuff
     [SerializeField] private TextMeshProUGUI goldText;
@@ -102,25 +103,42 @@ public class InventorySystem : MonoBehaviour
         PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
 
         RemoveItem(selectedItem);
-        DeleteItem(selectedItem);
+    }
+
+    public void ConsumeButtonClick()
+    {
+        if (selectedItem == null)
+            return;
+
+        if (selectedItem.isConsumable == false)
+            return;
+
+        selectedItem.OnConsumed?.Invoke();
+
+        if (selectedItem.isStackable)
+        {
+            selectedItem.SetStack(selectedItem.stack - 1);
+            return;
+        }
+        
+        RemoveItem(selectedItem);
     }
 
     public void RemoveItem(InventoryItem inventoryItem)
     {
+        GameObject itemObject = inventoryItem.gameObject;
+        
         currentStorageUsed -= inventoryItem.itemSize;
         items.Remove(inventoryItem);
         RemoveDisplayItem();
         UpdateStorageText();
+
+        Destroy(itemObject);
     }
 
     private void UpdateStorageText()
     {
         currentStorageText.SetText(currentStorageUsed.ToString() + "/" + storageSize);
-    }
-
-    public void DeleteItem(InventoryItem inventoryItem)
-    {
-        Destroy(inventoryItem.gameObject);
     }
 
     public T FindFirstItemOfClass<T>() where T : Component
@@ -207,6 +225,13 @@ public class InventorySystem : MonoBehaviour
                 buyButton.SetActive(false);
                 sellButton.SetActive(true);
             }
+        }
+        else
+        {
+            if (item.isConsumable)
+                consumeButton.SetActive(true);
+            else
+                consumeButton.SetActive(false);
         }
 
         displayItem = Instantiate(item.GetItemDropPrefab(), itemDisplayArea.position, Quaternion.identity);

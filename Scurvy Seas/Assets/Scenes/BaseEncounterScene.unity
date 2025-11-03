@@ -384,6 +384,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6191928081543977954}
     - target: {fileID: 2831942869220900900, guid: 48543f995257cb547be4f81503625a8a, type: 3}
+      propertyPath: consumeButton
+      value: 
+      objectReference: {fileID: 679365628}
+    - target: {fileID: 2831942869220900900, guid: 48543f995257cb547be4f81503625a8a, type: 3}
       propertyPath: itemValueText
       value: 
       objectReference: {fileID: 6191928081543977953}
@@ -803,6 +807,63 @@ MonoBehaviour:
   radiusClamp: 50
   maxYOffset: 100
   minYOffset: 10
+--- !u!1001 &391526707
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1301184222652552028, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_Name
+      value: GoldItemDrop
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.677786
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 40.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2110873311953331775, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d4c3fe495cd332c4ab8a4ab8387ff03e, type: 3}
 --- !u!1 &394927724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1353,6 +1414,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585735712}
   m_CullTransparentMesh: 1
+--- !u!1 &679365628 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1790041059950780948, guid: 3543e0e1addd2f746a9bbcc76b789d73, type: 3}
+  m_PrefabInstance: {fileID: 6191928081543977948}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &689687875
 GameObject:
   m_ObjectHideFlags: 0
@@ -5243,6 +5309,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: -1080
       objectReference: {fileID: 0}
+    - target: {fileID: 7079398891639501010, guid: 3543e0e1addd2f746a9bbcc76b789d73, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1123324098}
+    - target: {fileID: 7079398891639501010, guid: 3543e0e1addd2f746a9bbcc76b789d73, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ConsumeButtonClick
+      objectReference: {fileID: 0}
     - target: {fileID: 7915152293505734873, guid: 3543e0e1addd2f746a9bbcc76b789d73, type: 3}
       propertyPath: m_Name
       value: InventoryUI
@@ -5488,3 +5562,4 @@ SceneRoots:
   - {fileID: 3960181111404817151}
   - {fileID: 1825333699}
   - {fileID: 1364515308}
+  - {fileID: 391526707}

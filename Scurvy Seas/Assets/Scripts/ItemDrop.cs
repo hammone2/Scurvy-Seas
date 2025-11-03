@@ -28,7 +28,7 @@ public class ItemDrop : MonoBehaviour
         canBePickedUp = false;
     }
 
-    public void PickUpItem()
+    public virtual void PickUpItem()
     {
         if (!canBePickedUp)
             return;
@@ -36,7 +36,7 @@ public class ItemDrop : MonoBehaviour
         //create inventory item and add to inventory
         InventorySystem inventory = PlayerManager.instance.inventorySystem;
 
-        if (!inventory.HasEnoughStorage(itemSize)) //are there free cells?
+        if (!inventory.HasEnoughStorage(itemSize))
             return;
 
         inventory.PickUpItem(inventoryItemPrefab);
