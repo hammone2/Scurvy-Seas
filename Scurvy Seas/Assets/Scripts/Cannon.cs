@@ -8,14 +8,39 @@ public class Cannon : MonoBehaviour
     public GameObject cannonBallPrefab;
 
     private bool hasJustFired = false;
+
+
+    private bool _inRange = false;
+    private bool inRange
+    {
+        get { return _inRange; }
+        set {
+            if (_inRange == value) return;
+            _inRange = value;
+            
+            if (!_inRange)
+                rangeIcon.color = Color.white;
+            else
+                rangeIcon.color = Color.yellow;
+        }
+    }
+
     [SerializeField] private float fireRate = 1f;
+    [SerializeField] private float range = 100f;
     [SerializeField] private Image reloadIndicator;
     [SerializeField] private float launchForce = 50f;
     [SerializeField] private Transform projectileSpawner;
     [SerializeField] private LayerMask layersToHit;
+    [SerializeField] private GameObject rangeIndicator;
+    [SerializeField] private SpriteRenderer rangeIcon;
 
     public float elapsedTime = 0f;
     private Coroutine reloadCoroutine;
+
+    private void Start()
+    {
+        rangeIndicator.transform.localPosition = new Vector3(0f,0.5f,range);
+    }
 
     private void Update()
     {
@@ -29,11 +54,19 @@ public class Cannon : MonoBehaviour
     private void FireCannon()
     {
         RaycastHit hit;
-        if (!Physics.Raycast(projectileSpawner.position, projectileSpawner.forward, out hit, 100f, layersToHit))
+        if (!Physics.Raycast(projectileSpawner.position, projectileSpawner.forward, out hit, range, layersToHit))
+        {
+            inRange = false;
             return;
+        }
 
         if (!hit.collider.CompareTag("Enemy"))
+        {
+            inRange = false; 
             return;
+        }
+
+        inRange = true;
 
         //do we have cannonballs?
         InventorySystem inventory = PlayerManager.instance.inventorySystem;
