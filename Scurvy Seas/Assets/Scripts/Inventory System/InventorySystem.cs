@@ -141,11 +141,6 @@ public class InventorySystem : MonoBehaviour
         currentStorageText.SetText(currentStorageUsed.ToString() + "/" + storageSize);
     }
 
-    /*public void DeleteItem(InventoryItem inventoryItem)
-    {
-        Destroy(inventoryItem.gameObject);
-    }*/
-
     public T FindFirstItemOfClass<T>() where T : Component
     {
         for (int i = 0; i < items.Count; i++)

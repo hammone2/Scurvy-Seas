@@ -28,7 +28,7 @@ public class ItemDrop : MonoBehaviour
         canBePickedUp = false;
     }
 
-    public void PickUpItem()
+    public virtual void PickUpItem()
     {
         if (!canBePickedUp)
             return;
