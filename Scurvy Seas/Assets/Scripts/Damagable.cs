@@ -51,6 +51,8 @@ public class Damagable : MonoBehaviour
     public void Heal(float _health)
     {
         health += _health;
+        if (health > HealthValue)
+            health = HealthValue;
     }
 
     private void OnCollisionEnter(Collision collision)

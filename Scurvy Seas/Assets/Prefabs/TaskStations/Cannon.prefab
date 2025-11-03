@@ -281,13 +281,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   task: {fileID: 7666948649872752334}
   cannonBallPrefab: {fileID: 8909561335618160028, guid: 4163a9a32a92ec34b94e4079b237431f, type: 3}
-  fireRate: 3
-  launchForce: 50
+  fireRate: 1
   reloadIndicator: {fileID: 3529546836147139720}
+  launchForce: 50
   projectileSpawner: {fileID: 1227946711447447106}
   layersToHit:
     serializedVersion: 2
     m_Bits: 507
+  elapsedTime: 0
 --- !u!1 &7962538053063824332
 GameObject:
   m_ObjectHideFlags: 0

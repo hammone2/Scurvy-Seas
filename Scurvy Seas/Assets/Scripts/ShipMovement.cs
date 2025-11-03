@@ -112,6 +112,11 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
         playerManager = _playerManager;
     }
 
+    public void Heal(int amount)
+    {
+        damagableComponent.Heal(amount);
+    }
+
     public void Die()
     {
         GameManager.instance.EndGame();

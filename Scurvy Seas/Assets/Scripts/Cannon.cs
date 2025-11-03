@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 
 public class Cannon : MonoBehaviour
 {
@@ -7,16 +9,14 @@ public class Cannon : MonoBehaviour
 
     private bool hasJustFired = false;
     [SerializeField] private float fireRate = 1f;
+    [SerializeField] private Image reloadIndicator;
     [SerializeField] private float launchForce = 50f;
     [SerializeField] private Transform projectileSpawner;
     [SerializeField] private LayerMask layersToHit;
 
-<<<<<<< Updated upstream
-=======
     public float elapsedTime = 0f;
     private Coroutine reloadCoroutine;
 
->>>>>>> Stashed changes
     private void Update()
     {
         if (task.GetIsManned())
@@ -48,13 +48,10 @@ public class Cannon : MonoBehaviour
         if (ball.GetComponent<Rigidbody>())
             ball.GetComponent<Rigidbody>().AddForce(projectileSpawner.forward * launchForce, ForceMode.VelocityChange); //implement a range calculation later using the salvaged steel artillery code
 
-        Invoke("CoolDown", fireRate);
 
         InventoryItem item = cannonballItem.GetComponent<InventoryItem>();
         int stackValue = item.stack - 1;
         item.SetStack(stackValue);
-<<<<<<< Updated upstream
-=======
 
         reloadIndicator.fillAmount = 0f;
 
@@ -64,14 +61,10 @@ public class Cannon : MonoBehaviour
 
         elapsedTime = 0;
         reloadCoroutine = StartCoroutine(Reload());
->>>>>>> Stashed changes
     }
 
-    private void CoolDown()
+    private CannonballItem HasCannonBall()
     {
-<<<<<<< Updated upstream
-        hasJustFired = false;
-=======
         InventorySystem inventory = PlayerManager.instance.inventorySystem;
         CannonballItem cannonballItem = inventory.FindFirstItemOfClass<CannonballItem>();
         return cannonballItem;
@@ -104,6 +97,5 @@ public class Cannon : MonoBehaviour
             return;
 
         reloadCoroutine = StartCoroutine(Reload());
->>>>>>> Stashed changes
     }
 }

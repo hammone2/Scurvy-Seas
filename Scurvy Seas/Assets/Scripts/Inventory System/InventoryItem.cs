@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class InventoryItem : MonoBehaviour
 {
@@ -9,8 +10,11 @@ public class InventoryItem : MonoBehaviour
     public int itemSize = 1;
     public int itemValue = 1;
     public bool isStackable = false;
+    public bool isConsumable = false;
     public int stack = 0;
     [SerializeField] private TextMeshProUGUI stacktext;
+
+    public UnityEvent OnConsumed;
 
     private void Awake()
     {
@@ -37,6 +41,6 @@ public class InventoryItem : MonoBehaviour
         stack = value;
 
         if (stack <= 0)
-            PlayerManager.instance.inventorySystem.DeleteItem(this);
+            PlayerManager.instance.inventorySystem.RemoveItem(this);
     }
 }
