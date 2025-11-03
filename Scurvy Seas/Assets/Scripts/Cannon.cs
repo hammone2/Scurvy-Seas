@@ -51,22 +51,29 @@ public class Cannon : MonoBehaviour
         }
     }
 
-    private void FireCannon()
+    private bool IsRaycastCollidingWithEnemy()
     {
         RaycastHit hit;
         if (!Physics.Raycast(projectileSpawner.position, projectileSpawner.forward, out hit, range, layersToHit))
         {
             inRange = false;
-            return;
+            return false;
         }
 
         if (!hit.collider.CompareTag("Enemy"))
         {
-            inRange = false; 
-            return;
+            inRange = false;
+            return false;
         }
 
         inRange = true;
+        return true;
+    }
+
+    private void FireCannon()
+    {
+        if (!IsRaycastCollidingWithEnemy())
+            return;
 
         //do we have cannonballs?
         InventorySystem inventory = PlayerManager.instance.inventorySystem;
