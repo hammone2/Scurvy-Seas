@@ -1,6 +1,8 @@
 # Scurvy Seas
 
-Play Here: https://hammone2.github.io/Scurvy-Seas/
+Download: https://mind-virus-interactive.itch.io/scurvy-seas-indev
+
+Play In Browser: https://hammone2.github.io/Scurvy-Seas/
 
 
 # v0.1.3 Changelog:
