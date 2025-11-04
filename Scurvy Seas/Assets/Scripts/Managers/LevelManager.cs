@@ -43,7 +43,15 @@ public class LevelManager : MonoBehaviour
         }
 
         if (!GameManager.instance.isNewGame)
+        {
+            //Load save data
             Invoke("LoadGame", 1f);
+        }
+        else
+        {
+            //Set starting defaults
+            InventorySystem.instance.gold = 1000;
+        }
     }
 
     public void NextEncounter()
