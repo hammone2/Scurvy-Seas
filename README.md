@@ -2,7 +2,8 @@
 
 Play Here: https://hammone2.github.io/Scurvy-Seas/
 
-v0.1.3 Changelog:
+
+# v0.1.3 Changelog:
 
 - New Features:
   - Added cannon loading/ready indicator.
