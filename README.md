@@ -1,14 +1,19 @@
+#Scurvy Seas
+
 Play Here: https://hammone2.github.io/Scurvy-Seas/
 
-v0.1.2 Changelog:
+v0.1.3 Changelog:
 
 - New Features:
-  - Replaced grid-based inventory system with Skyrim-style inventory system.
-  - Added Title Screen.
-  - Added Cannonball Item.
-  - The game will now automatically load save data when progressing to the next level.
-  - Added Pirate font.
-  - Player Ship HP has been added to save data.
+  - Added cannon loading/ready indicator.
+  - Added cannon range icon.
+  - Added buy & sell functionality to the shop.
+  - Added Gold item drop.
+  - Added max storage capacity to inventory.
+  - Added repair kit item.
+  - Inventory is now loaded when entering port and saved after exiting port.
+  - The player can now spend money in the shop and earn money by selling items.
+  - Added water shader to level.
 
 - Bug Fixes:
   - N/A
