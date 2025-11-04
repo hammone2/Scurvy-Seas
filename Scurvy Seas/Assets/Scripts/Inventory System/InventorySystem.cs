@@ -102,7 +102,7 @@ public class InventorySystem : MonoBehaviour
         GameObject itemDrop = Instantiate(selectedItem.GetItemDropPrefab());
         PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
 
-        RemoveItem(selectedItem);
+        DeleteItem(selectedItem);
     }
 
     public void ConsumeButtonClick()
@@ -121,19 +121,21 @@ public class InventorySystem : MonoBehaviour
             return;
         }
         
-        RemoveItem(selectedItem);
+        DeleteItem(selectedItem);
     }
 
     public void RemoveItem(InventoryItem inventoryItem)
     {
-        GameObject itemObject = inventoryItem.gameObject;
-        
         currentStorageUsed -= inventoryItem.itemSize;
         items.Remove(inventoryItem);
         RemoveDisplayItem();
         UpdateStorageText();
+    }
 
-        Destroy(itemObject);
+    public void DeleteItem(InventoryItem inventoryItem)
+    {
+        RemoveItem(inventoryItem);
+        Destroy(inventoryItem.gameObject);
     }
 
     private void UpdateStorageText()
