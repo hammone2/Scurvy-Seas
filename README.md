@@ -1,4 +1,4 @@
-#Scurvy Seas
+# Scurvy Seas
 
 Play Here: https://hammone2.github.io/Scurvy-Seas/
 
