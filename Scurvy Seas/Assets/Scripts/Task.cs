@@ -12,7 +12,9 @@ public class Task : MonoBehaviour
     public UnityEvent OnEnableTask;
     public UnityEvent OnDisableTask;
     private Crewmate crewmateWorkingThisTask;
-    private List<Crewmate> crewmatesInArea = new List<Crewmate>(); 
+    private List<Crewmate> crewmatesInArea = new List<Crewmate>();
+    [SerializeField] private MeshRenderer myRenderer;
+    [SerializeField] private GameObject model;
 
     private bool _isManned;
     private bool isManned
@@ -24,14 +26,16 @@ public class Task : MonoBehaviour
 
             _isManned = value;
 
-            if (_isManned) //use this if else to set color for task area indicator later
+            if (_isManned)
             {
                 OnEnableTask.Invoke();
+                myRenderer.material.color = new Color(0f,1f,0.5f,0.3f);
                 Debug.Log("Task is manned");
             }
             else
             {
                 OnDisableTask.Invoke();
+                myRenderer.material.color = new Color(1f,1f,1f,0.3f);
                 Debug.Log("Task is vacant");
             }
         }
@@ -54,7 +58,17 @@ public class Task : MonoBehaviour
             rb.useGravity = false;
         }
 
+
+        //Set up task area indicator
+        myRenderer.material.color = new Color(1f, 1f, 1f, 0.3f);
         isManned = false;
+
+        ToggleAreaVisibility(false);
+    }
+
+    private void Start()
+    {
+        PlayerManager.instance.OnSelectedCrewmate += ToggleAreaVisibility;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -106,5 +120,10 @@ public class Task : MonoBehaviour
     public bool GetIsManned()
     {
         return isManned;
+    }
+
+    public void ToggleAreaVisibility(bool b)
+    {
+        model.SetActive(b);
     }
 }
