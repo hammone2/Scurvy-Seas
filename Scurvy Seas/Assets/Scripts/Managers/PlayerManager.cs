@@ -25,8 +25,21 @@ public class PlayerManager : MonoBehaviour
 
     public ShipMovement playerShip;
 
+    //Crewmate stuff
     [SerializeField] Crewmate selectedCrewmate;
-    private bool isCrewmateSelected = false;
+    public event System.Action<bool> OnSelectedCrewmate = delegate (bool b) { };
+    private bool _isCrewmateSelected = false;
+    private bool isCrewmateSelected
+    {
+        get { return _isCrewmateSelected; }
+        set
+        {
+            if (value == _isCrewmateSelected) return;
+
+            _isCrewmateSelected = value;
+            OnSelectedCrewmate(value);
+        }
+    }
 
     private Camera playerCamera;
     public Camera inventoryCamera;
