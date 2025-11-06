@@ -33,6 +33,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private LayerMask layersToHit;
     [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private SpriteRenderer rangeIcon;
+    [SerializeField] private ParticleSystem particles;
 
     public float elapsedTime = 0f;
     private Coroutine reloadCoroutine;
@@ -94,6 +95,8 @@ public class Cannon : MonoBehaviour
         item.SetStack(stackValue);
 
         reloadIndicator.fillAmount = 0f;
+
+        particles.Play();
 
         //reload
         if (!HasCannonBall())
