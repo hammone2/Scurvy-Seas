@@ -306,9 +306,16 @@ MonoBehaviour:
   itemDropPrefab: {fileID: 7454156401767476119, guid: 4574a96c7aa81654589a33f83d1cfbd2, type: 3}
   prefabPath: InventoryItem
   itemSize: 1
+  itemValue: 1
   isStackable: 0
+  isConsumable: 0
   stack: 0
+  itemName: Item Name
   stacktext: {fileID: 5873202785398176516}
+  nameText: {fileID: 3932073372244058537}
+  OnConsumed:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3818302669375085316
 MonoBehaviour:
   m_ObjectHideFlags: 0

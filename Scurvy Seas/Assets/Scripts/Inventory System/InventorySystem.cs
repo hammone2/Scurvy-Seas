@@ -88,6 +88,8 @@ public class InventorySystem : MonoBehaviour
     {
         items.Add(item);
 
+        //put stacking to existing item of same type here later
+
         currentStorageUsed += item.itemSize;
         UpdateStorageText();
     }
@@ -239,7 +241,7 @@ public class InventorySystem : MonoBehaviour
         displayItem.GetComponent<Outline>().enabled = false;
         displayItem.layer = LayerMask.NameToLayer("Inventory");
 
-        itemNameInfo.SetText(item.name);
+        itemNameInfo.SetText(item.GetName());
         itemSizeText.SetText("Size: "+item.itemSize.ToString());
         itemValueText.SetText("Value: "+item.itemValue.ToString());
     }

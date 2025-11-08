@@ -12,7 +12,9 @@ public class InventoryItem : MonoBehaviour
     public bool isStackable = false;
     public bool isConsumable = false;
     public int stack = 0;
+    [SerializeField] private string itemName;
     [SerializeField] private TextMeshProUGUI stacktext;
+    [SerializeField] private TextMeshProUGUI nameText;
 
     public UnityEvent OnConsumed;
 
@@ -20,6 +22,8 @@ public class InventoryItem : MonoBehaviour
     {
         if (!isStackable)
             stacktext.gameObject.SetActive(false);
+
+        nameText.SetText(itemName);
     }
 
     public GameObject GetItemDropPrefab()
@@ -42,5 +46,10 @@ public class InventoryItem : MonoBehaviour
 
         if (stack <= 0)
             PlayerManager.instance.inventorySystem.RemoveItem(this);
+    }
+
+    public string GetName()
+    {
+        return itemName;
     }
 }
