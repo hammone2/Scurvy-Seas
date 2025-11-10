@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class Damagable : MonoBehaviour
 {
     [SerializeField] private float HealthValue = 100f;
+    [SerializeField] private GameObject damagePopup;
 
     private float _health;
     public float health
@@ -43,6 +44,9 @@ public class Damagable : MonoBehaviour
             return;
 
         health -= damage;
+
+        DamagePopup popup = Instantiate(damagePopup, transform.position, Quaternion.identity).GetComponent<DamagePopup>();
+        popup.SetDamageValue(-damage);
 
         if (health <= 0)
             OnDeath?.Invoke();
