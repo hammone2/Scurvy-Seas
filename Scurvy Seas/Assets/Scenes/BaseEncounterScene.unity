@@ -804,7 +804,7 @@ MonoBehaviour:
   offset: {x: 0, y: 24.8, z: -15}
   followThis: {fileID: 820473144}
   moveSpeed: 14
-  radiusClamp: 50
+  radiusClamp: 100
   maxYOffset: 100
   minYOffset: 10
 --- !u!1001 &391526707
