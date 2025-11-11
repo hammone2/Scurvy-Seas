@@ -2,22 +2,21 @@
 
 Download: https://mind-virus-interactive.itch.io/scurvy-seas-indev
 
-Play In Browser: https://hammone2.github.io/Scurvy-Seas/
 
-
-# v0.1.3 Changelog:
+# v0.2.0 Changelog:
 
 - New Features:
-  - Added cannon loading/ready indicator.
-  - Added cannon range icon.
-  - Added buy & sell functionality to the shop.
-  - Added Gold item drop.
-  - Added max storage capacity to inventory.
-  - Added repair kit item.
-  - Inventory is now loaded when entering port and saved after exiting port.
-  - The player can now spend money in the shop and earn money by selling items.
-  - Added water shader to level.
+  - Created models for cannon and starting ship.
+  - Added visual indicators for task station locations that appear when a crewmate is selected.
+  - Added muzzle flash to cannon.
+  - Added trail effects for cannon balls and ship wake.
+  - Popups showing damage delt when an enemy is hit will appear above the enemy.
+  - Added text box that shows an item drop's size and value when the mouse hovers over it.
+  - Increased player ship's item pickup radius. 
 
 - Bug Fixes:
-  - N/A
+  - Fixed items being deleted when sold.
+  - Fixed gold being reset to 0 when entering the shop.
+  - Fixed item names not displaying properly in item info box.
+  - Fixed healthbars sliding when clicked and dragged.
 
