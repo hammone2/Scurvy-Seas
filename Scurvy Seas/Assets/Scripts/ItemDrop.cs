@@ -1,9 +1,12 @@
+using System.Net.Http.Headers;
 using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
     [SerializeField] private int itemSize = 1;
+    [SerializeField] private int itemValue = 1;
     [SerializeField] private Outline outline;
+    [SerializeField] private GameObject textPopup;
     
     private bool _canBePickedUp;
     public bool canBePickedUp
@@ -41,6 +44,14 @@ public class ItemDrop : MonoBehaviour
 
         inventory.PickUpItem(inventoryItemPrefab);
 
+        TextPopup popup = Instantiate(textPopup, transform.position, Quaternion.identity).GetComponent<TextPopup>();
+        popup.SetTextValue("Picked up " + name, 8, Color.white, 1.5f, 10f);
+
         Destroy(gameObject);
+    }
+
+    public (int _size, int _value) GetInfo()
+    {
+        return (itemSize, itemValue);
     }
 }

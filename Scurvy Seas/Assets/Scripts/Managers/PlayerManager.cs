@@ -51,6 +51,10 @@ public class PlayerManager : MonoBehaviour
 
     //item pickup stuff
     [SerializeField] private GameObject itemDropSearcherPrefab;
+    [SerializeField] private GameObject itemPickupInfo;
+    [SerializeField] private TextMeshProUGUI itemPickupName;
+    [SerializeField] private TextMeshProUGUI itemPickupSize;
+    [SerializeField] private TextMeshProUGUI itemPickupValue;
     private ItemDropSearcher itemDropSearcher;
 
 
@@ -88,6 +92,27 @@ public class PlayerManager : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             MoveToMouseClick();
+        }
+
+
+        //ietm drop info popup (change this later so that we can scan for a wider variety of things if needed)
+        var hitObject = ShootRaycast(playerCamera);
+        if (hitObject != null)
+        {
+            ItemDrop itemDrop = hitObject.GetComponent<ItemDrop>();
+            if (itemDrop)
+            {
+                itemPickupInfo.SetActive(true);
+                itemPickupName.SetText(itemDrop.name);
+
+                var info = itemDrop.GetInfo();
+                itemPickupSize.SetText("Size: " + info._size.ToString());
+                itemPickupValue.SetText("Value: " + info._value.ToString());
+            }
+        }
+        else
+        {
+            itemPickupInfo.SetActive(false);
         }
     }
 

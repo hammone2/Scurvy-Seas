@@ -154,7 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSize: 0
+  itemValue: 1
   outline: {fileID: -506357686893985230}
+  textPopup: {fileID: 5384250094364689661, guid: df79bade10128f343b28db5f827d37b4, type: 3}
   inventoryItemPrefab: {fileID: 0}
 --- !u!114 &-506357686893985230
 MonoBehaviour:
