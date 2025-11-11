@@ -45,8 +45,8 @@ public class Damagable : MonoBehaviour
 
         health -= damage;
 
-        DamagePopup popup = Instantiate(damagePopup, transform.position, Quaternion.identity).GetComponent<DamagePopup>();
-        popup.SetDamageValue(-damage);
+        TextPopup popup = Instantiate(damagePopup, transform.position, Quaternion.identity).GetComponent<TextPopup>();
+        popup.SetTextValue(""+-damage, 36, Color.red);
 
         if (health <= 0)
             OnDeath?.Invoke();
