@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using NUnit.Framework.Interfaces;
 
 public class LevelManager : MonoBehaviour
 {
@@ -50,7 +51,10 @@ public class LevelManager : MonoBehaviour
         else
         {
             //Set starting defaults
-            InventorySystem.instance.gold = 1000;
+            InventorySystem inventory = InventorySystem.instance;
+            inventory.gold = 1000;
+            GameObject cannonballs = Resources.Load<GameObject>("Cannonball");
+            inventory.PickUpItem(cannonballs);
         }
     }
 
