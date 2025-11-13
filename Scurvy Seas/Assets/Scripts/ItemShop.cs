@@ -1,9 +1,12 @@
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ItemShop : MonoBehaviour
 {
     [SerializeField] private Transform shopContent;
+    [SerializeField] private LootTable lootTable;
     
     //Gold stuff
     [SerializeField] private TextMeshProUGUI goldText;
@@ -23,6 +26,22 @@ public class ItemShop : MonoBehaviour
     private void Start()
     {
         gold = Random.Range(100, 1000);
+
+        if (lootTable == null)
+            return;
+
+        List<GameObject> loot = lootTable.GenerateLoot();
+        if (loot == null)
+            return;
+        Debug.Log(loot.Count);
+        for (int i = 0; i < loot.Count; i++)
+        {
+            GameObject lootObj = loot[i];
+            if (lootObj.GetComponent<InventoryItem>())
+            {
+                Instantiate(lootObj, shopContent);
+            }
+        }
     }
 
     public void BuyItem()
