@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1434861376355280275}
   - component: {fileID: 5407314043273163658}
+  - component: {fileID: 2943241260404016272}
   m_Layer: 0
   m_Name: TestSeaMonster
   m_TagString: Enemy
@@ -83,7 +84,19 @@ MonoBehaviour:
   rotationSpeed: 22.5
   fireRate: 3
   launchForce: 10
-  itemDrop: {fileID: 7454156401767476119, guid: 4574a96c7aa81654589a33f83d1cfbd2, type: 3}
+--- !u!114 &2943241260404016272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6574098890105931055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89c7210bc0c69943aaa97664feab506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 0061f1b3557ef704fad153c50507d857, type: 2}
 --- !u!1 &8991091671892315403
 GameObject:
   m_ObjectHideFlags: 0

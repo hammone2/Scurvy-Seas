@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 225929605}
   - component: {fileID: 225929606}
+  - component: {fileID: 225929607}
   m_Layer: 0
   m_Name: ItemShop
   m_TagString: Untagged
@@ -164,8 +165,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shopContent: {fileID: 1409717208}
-  lootTable: {fileID: 11400000, guid: 2b5e4e21e833ba14a88a036c47f86106, type: 2}
+  lootSpawner: {fileID: 225929607}
   goldText: {fileID: 777487469}
+--- !u!114 &225929607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 225929604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c89c7210bc0c69943aaa97664feab506, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lootTable: {fileID: 11400000, guid: 2b5e4e21e833ba14a88a036c47f86106, type: 2}
 --- !u!1 &291474204
 GameObject:
   m_ObjectHideFlags: 0
