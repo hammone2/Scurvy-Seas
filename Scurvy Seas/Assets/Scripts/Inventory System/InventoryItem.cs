@@ -45,7 +45,7 @@ public class InventoryItem : MonoBehaviour
         stack = value;
 
         if (stack <= 0)
-            PlayerManager.instance.inventorySystem.RemoveItem(this);
+            InventorySystem.instance.DeleteItem(this);
     }
 
     public string GetName()

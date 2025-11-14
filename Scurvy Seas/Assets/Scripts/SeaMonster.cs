@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster/enemy class that I can use to make enemy ships and monsters
@@ -11,7 +12,7 @@ public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster
     [SerializeField] private float fireRate = 1f;
     [SerializeField] private float launchForce = 50f;
 
-    [SerializeField] private GameObject itemDrop;
+    private LootSpawner lootSpawner;
 
     private Transform player;
 
@@ -19,6 +20,7 @@ public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster
     {
         player = PlayerManager.instance.playerShip.transform;
         LevelManager.instance.AddEnemy(gameObject);
+        lootSpawner = GetComponent<LootSpawner>();
     }
 
 
@@ -58,7 +60,8 @@ public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster
 
     public void Die()
     {
-        Instantiate(itemDrop, transform.position, Quaternion.identity);
+        lootSpawner.CreateItemDrops(transform);
+
         LevelManager.instance.RemoveEnemy(gameObject);
         Destroy(gameObject);
     }
