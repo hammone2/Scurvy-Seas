@@ -16,6 +16,8 @@ public class Task : MonoBehaviour
     [SerializeField] private MeshRenderer myRenderer;
     [SerializeField] private GameObject model;
 
+    public bool isOwnedByPlayer = false;
+
     private bool _isManned;
     private bool isManned
     {
@@ -64,11 +66,6 @@ public class Task : MonoBehaviour
         isManned = false;
 
         ToggleAreaVisibility(false);
-    }
-
-    private void Start()
-    {
-        PlayerManager.instance.OnSelectedCrewmate += ToggleAreaVisibility;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -125,5 +122,12 @@ public class Task : MonoBehaviour
     public void ToggleAreaVisibility(bool b)
     {
         model.SetActive(b);
+    }
+
+    public void ConnectVisibilityEvent(bool _isOwnedByPlayer)
+    {
+        if (!_isOwnedByPlayer)
+            return;
+        PlayerManager.instance.OnSelectedCrewmate += ToggleAreaVisibility;
     }
 }

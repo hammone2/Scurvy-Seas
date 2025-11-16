@@ -12,7 +12,8 @@ public class Crewmate : MonoBehaviour
 
     [SerializeField] private Outline outline;
 
-    public bool isDoingTask; 
+    public bool isDoingTask;
+    public bool isOwnedByPlayer = false;
 
     private void Awake()
     {
@@ -89,11 +90,17 @@ public class Crewmate : MonoBehaviour
 
     public void ToggleOutline()
     {
+        if (!isOwnedByPlayer)
+            return;
+
         outline.enabled = !outline.enabled;
     }
 
     public void SelectCrewmate()
     {
+        if (!isOwnedByPlayer)
+            return;
+
         PlayerManager.instance.SetSelectedCrewmate(this);
     }
 

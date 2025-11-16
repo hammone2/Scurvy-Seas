@@ -90,17 +90,20 @@ public class Cannon : MonoBehaviour
             ball.GetComponent<Rigidbody>().AddForce(projectileSpawner.forward * launchForce, ForceMode.VelocityChange); //implement a range calculation later using the salvaged steel artillery code
 
 
-        InventoryItem item = cannonballItem.GetComponent<InventoryItem>();
-        int stackValue = item.stack - 1;
-        item.SetStack(stackValue);
-
-        reloadIndicator.fillAmount = 0f;
-
         particles.Play();
 
-        //reload
-        if (!HasCannonBall())
-            return;
+        if (task.isOwnedByPlayer)
+        {
+            InventoryItem item = cannonballItem.GetComponent<InventoryItem>();
+            int stackValue = item.stack - 1;
+            item.SetStack(stackValue);
+
+            reloadIndicator.fillAmount = 0f;
+
+            //reload
+            if (!HasCannonBall())
+                return;
+        }
 
         elapsedTime = 0;
         reloadCoroutine = StartCoroutine(Reload());
