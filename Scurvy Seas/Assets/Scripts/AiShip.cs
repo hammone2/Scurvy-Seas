@@ -9,6 +9,7 @@ public class AiShip : MonoBehaviour
 
     [SerializeField] private float range = 50f;
     private Transform target;
+    private Rigidbody rb;
 
     private enum ShipState
     {
@@ -21,11 +22,12 @@ public class AiShip : MonoBehaviour
     {
         shipState = ShipState.Pursuing;
         ship = GetComponent<ShipMovement>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Start()
     {
-        target = PlayerManager.instance.playerShip.transform;
+        target = PlayerManager.instance.playerShip.transform; 
         ship.canSetSailLength = true; //this is temporary make sure the crewmate is manning the sail task
         Invoke("SendCrewToBattleStations", 0.25f);
     }
@@ -35,8 +37,8 @@ public class AiShip : MonoBehaviour
         if (!target)
             return;
         
-        Vector3 localTargetPos = transform.InverseTransformPoint(target.position); //translate targets global pos to local coordinates
-
+        Vector3 delta = (target.position - transform.position).normalized;
+        Vector3 cross = Vector3.Cross(delta, transform.forward);
 
         switch (shipState)
         {
@@ -44,23 +46,23 @@ public class AiShip : MonoBehaviour
                 if (Vector3.Distance(transform.position, target.position) <= range)
                 {
                     shipState = ShipState.Engaging;
+                    Debug.LogWarning("State = " + shipState.ToString());
                 }
 
-
-                //Steer the ship in the direction of the player
-
-                    //check sides
-                if (localTargetPos.x < 0)
+                if (cross == Vector3.zero)
                 {
-                    //target is on the right
+                    // Target is straight ahead
+                    ship.HandleSteer(0);
+                }
+                else if (cross.y > 0)
+                {
+                    // Target is to the right
                     ship.HandleSteer(1);
-                    Debug.Log("Pursuing Right");
                 }
                 else
                 {
-                    //target is on the left
+                    // Target is to the left
                     ship.HandleSteer(-1);
-                    Debug.Log("Pursuing Left");
                 }
 
 
@@ -70,42 +72,37 @@ public class AiShip : MonoBehaviour
                 if (Vector3.Distance(transform.position, target.position) > range)
                 {
                     shipState = ShipState.Pursuing;
+                    Debug.LogWarning("State = " + shipState.ToString());
                 }
 
-
-                //Steer ship to have its guns face the player depending on the quadrant relative to this ship's position they are in
-
-                    //check quadrants
-                if (localTargetPos.z > 0 && localTargetPos.x < 0)
+                if (cross == Vector3.zero)
                 {
-                    // Target is to the front left
-                    ship.HandleSteer(-1);
-                    Debug.Log("Engaging Front Left");
+                    // Target is straight ahead
+                    ship.HandleSteer(0);
                 }
-                else if (localTargetPos.z > 0 && localTargetPos.x > 0)
+                else if (cross.y > 0)
                 {
-                    // Target is to the front right
-                    ship.HandleSteer(1);
-                    Debug.Log("Engaging Front Right");
+                    // Target is to the right
+                    HandleSteer(Vector3.right);
                 }
-                else if (localTargetPos.z < 0 && localTargetPos.x < 0)
+                else
                 {
-                    // Target is to the bottom left
-                    ship.HandleSteer(-1);
-                    Debug.Log("Engaging Bottom Left");
+                    // Target is to the left
+                    HandleSteer(Vector3.left);
                 }
-                else if (localTargetPos.z < 0 && localTargetPos.x > 0)
-                {
-                    // Target is to the bottom right
-                    ship.HandleSteer(1);
-                    Debug.Log("Engaging Bottom Right");
-                }
-
 
                 break;
         }
+    }
 
-        Debug.LogWarning("State = " + shipState.ToString());
+    private void HandleSteer(Vector3 sideDirection)
+    {
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
+        float angle = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
+        rotation = Quaternion.Euler(0, angle + sideDirection.x * 180f, 0) * rotation;
+
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, rotation, Time.deltaTime));
     }
 
     private void SendCrewToBattleStations()
