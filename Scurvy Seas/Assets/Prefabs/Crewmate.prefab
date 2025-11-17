@@ -187,6 +187,7 @@ MonoBehaviour:
   rotationSpeed: 7
   outline: {fileID: 431263505494509764}
   isDoingTask: 0
+  isOwnedByPlayer: 0
 --- !u!54 &8763892237788249917
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -249,7 +250,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6995542575944692796}
         m_TargetAssemblyTypeName: Crewmate, Assembly-CSharp
-        m_MethodName: ToggleOutline
+        m_MethodName: SelectCrewmate
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -261,7 +262,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 6995542575944692796}
         m_TargetAssemblyTypeName: Crewmate, Assembly-CSharp
-        m_MethodName: SelectCrewmate
+        m_MethodName: ToggleOutline
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

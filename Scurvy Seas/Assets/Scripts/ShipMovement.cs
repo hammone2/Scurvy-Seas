@@ -13,13 +13,17 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
 
     public bool canSteer = false;
     public bool canSetSailLength = false;
+    public bool isOwnedByPlayer = false;
 
     private Rigidbody rb;
     private List<NavMeshAgent> agentsOnShip = new List<NavMeshAgent>();
+    private List<Task> taskStations = new List<Task>();
 
     private PlayerManager playerManager; //might change this to a conroller base class that AIShip and PlayerManager inherit from
 
     [SerializeField] private Transform itemDisposal;
+    [SerializeField] private Transform crewmateContainer;
+    [SerializeField] private Transform taskStationContainer;
     [SerializeField] private GameObject crewmatePrefab;
 
     [SerializeField] private Damagable damagableComponent;
@@ -29,14 +33,28 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
         rb = GetComponent<Rigidbody>();
 
         //initial get crewmates
-        for (int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < crewmateContainer.childCount; i++)
         {
-            GameObject obj = transform.GetChild(i).gameObject;
+            GameObject obj = crewmateContainer.GetChild(i).gameObject;
             if (obj.TryGetComponent<NavMeshAgent>(out NavMeshAgent agent))
             {
                 agentsOnShip.Add(agent);
                 Crewmate crewmate = obj.GetComponent<Crewmate>();
                 crewmate.ReparentNavPoint(transform);
+                crewmate.isOwnedByPlayer = isOwnedByPlayer;
+            }
+        }
+
+        //get task stations
+        for (int i = 0; i < taskStationContainer.childCount; i++)
+        {
+            GameObject obj = taskStationContainer.GetChild(i).gameObject;
+            Task taskStation = obj.GetComponentInChildren<Task>();
+            if (taskStation != null)
+            {
+                taskStations.Add(taskStation);
+                taskStation.isOwnedByPlayer = isOwnedByPlayer;
+                taskStation.ConnectVisibilityEvent(isOwnedByPlayer);
             }
         }
     }
@@ -71,6 +89,10 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
     public void SetSteerTask(bool _canSteer)
     {
         canSteer = _canSteer;
+
+        if (!isOwnedByPlayer)
+            return;
+
         if (playerManager != null)
             playerManager.SetSteerTask(!_canSteer);
     }
@@ -78,6 +100,10 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
     public void SetSailTask(bool _canSetSailLength)
     {
         canSetSailLength = _canSetSailLength;
+
+        if (!isOwnedByPlayer)
+            return;
+
         if (playerManager != null)
             playerManager.SetSailTask(!_canSetSailLength);
     }
@@ -110,6 +136,7 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
     public void SetPlayerManager(PlayerManager _playerManager)
     {
         playerManager = _playerManager;
+        isOwnedByPlayer = true;
     }
 
     public void Heal(int amount)
@@ -119,12 +146,23 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
 
     public void Die()
     {
-        GameManager.instance.EndGame();
+        if (isOwnedByPlayer)
+            GameManager.instance.EndGame();
     }
 
     public void ThrowItemOverboard(GameObject item)
     {
         item.transform.position = itemDisposal.position;
+    }
+
+    public List<NavMeshAgent> GetCrewmates()
+    {
+        return agentsOnShip;
+    }
+
+    public List<Task> GetTaskStations()
+    {
+        return taskStations;
     }
 
     public ShipData Save()
@@ -169,7 +207,7 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
         for (int i = 0; i < shipData.Crewmates.Length; i++)
         {
             CrewmateData crewmateData = shipData.Crewmates[i];
-            GameObject newCrewmate = Instantiate(crewmatePrefab, transform);
+            GameObject newCrewmate = Instantiate(crewmatePrefab, crewmateContainer);
             newCrewmate.name = crewmateData.Name;
             newCrewmate.transform.localPosition = new Vector3(crewmateData.Position[0], crewmateData.Position[1], crewmateData.Position[2]);
 
@@ -180,6 +218,7 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
                 agentsOnShip.Add(agent);
                 Crewmate crewmate = newCrewmate.GetComponent<Crewmate>();
                 crewmate.ReparentNavPoint(transform);
+                crewmate.isOwnedByPlayer = isOwnedByPlayer;
             }
         }
 
