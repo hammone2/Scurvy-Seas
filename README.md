@@ -3,20 +3,13 @@
 Download: https://mind-virus-interactive.itch.io/scurvy-seas-indev
 
 
-# v0.2.0 Changelog:
+# v0.2.1 Changelog:
 
 - New Features:
-  - Created models for cannon and starting ship.
-  - Added visual indicators for task station locations that appear when a crewmate is selected.
-  - Added muzzle flash to cannon.
-  - Added trail effects for cannon balls and ship wake.
-  - Popups showing damage delt when an enemy is hit will appear above the enemy.
-  - Added text box that shows an item drop's size and value when the mouse hovers over it.
-  - Increased player ship's item pickup radius. 
+  - The Player now has a stack of cannonballs in their inventory when starting a new game.
+  - Shop items are now randomized.
+  - Enemy item drops are now randomized.
+  - Added enemy ship AI + combat.
 
 - Bug Fixes:
-  - Fixed items being deleted when sold.
-  - Fixed gold being reset to 0 when entering the shop.
-  - Fixed item names not displaying properly in item info box.
-  - Fixed healthbars sliding when clicked and dragged.
-
+  - N/A
