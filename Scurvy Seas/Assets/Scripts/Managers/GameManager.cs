@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("BaseEncounterScene");
     }
 
+    public void QuitToTitle()
+    {
+        SceneManager.LoadScene("TitleScene");
+    }
+
     public void EndGame()
     {
         SceneManager.LoadScene("GameOverScene");

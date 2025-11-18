@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
@@ -6,6 +5,7 @@ using System.Collections.Generic;
 public class AiShip : MonoBehaviour
 {
     private ShipMovement ship;
+    [SerializeField] private LootSpawner lootSpawner;
 
     [SerializeField] private float range = 50f;
     private Transform target;
@@ -102,7 +102,7 @@ public class AiShip : MonoBehaviour
         float angle = Vector3.SignedAngle(transform.forward, direction, Vector3.up);
         rotation = Quaternion.Euler(0, angle + sideDirection.x * 180f, 0) * rotation;
 
-        rb.MoveRotation(Quaternion.Slerp(rb.rotation, rotation, Time.deltaTime));
+        rb.MoveRotation(Quaternion.Slerp(rb.rotation, rotation, Time.deltaTime * 0.1f));
     }
 
     private void SendCrewToBattleStations()
@@ -118,5 +118,13 @@ public class AiShip : MonoBehaviour
             }
         }
         ship.HandleThrust(1f);
+    }
+
+    public void Die()
+    {
+        lootSpawner.CreateItemDrops(transform);
+
+        LevelManager.instance.RemoveEnemy(gameObject);
+        Destroy(gameObject);
     }
 }

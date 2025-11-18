@@ -5,6 +5,6 @@ public class RestartGame : MonoBehaviour
 {
     public void NewGame()
     {
-        GameManager.instance.RestartGame();
+        GameManager.instance.QuitToTitle();
     }
 }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7129793945733604190}
   - component: {fileID: 3438804056375023982}
   - component: {fileID: 3029034852554455402}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ItemDropSearcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}

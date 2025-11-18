@@ -35,8 +35,6 @@ public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-
-
         if (!hasJustFired)
             FireCannon();
     }

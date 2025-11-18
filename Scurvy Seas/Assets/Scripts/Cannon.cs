@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Cannon : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class Cannon : MonoBehaviour
     [SerializeField] private Image reloadIndicator;
     [SerializeField] private float launchForce = 50f;
     [SerializeField] private Transform projectileSpawner;
+    [SerializeField] private Transform raycastShooter;
     [SerializeField] private LayerMask layersToHit;
     [SerializeField] private GameObject rangeIndicator;
     [SerializeField] private SpriteRenderer rangeIcon;
@@ -38,9 +40,20 @@ public class Cannon : MonoBehaviour
     public float elapsedTime = 0f;
     private Coroutine reloadCoroutine;
 
+    /*/Line render stuff
+    private LineRenderer lineRenderer;
+    private int numPoints = 50;
+    private float timeBetweenPoints = 0.1f;*/
+
     private void Start()
     {
         rangeIndicator.transform.localPosition = new Vector3(0f,0.5f,range);
+
+        /*/if (!task.isOwnedByPlayer)
+            return;
+
+        lineRenderer = GetComponent<LineRenderer>();
+        CalculateTrajectoryLine();*/
     }
 
     private void Update()
@@ -50,18 +63,21 @@ public class Cannon : MonoBehaviour
             if (!hasJustFired)
                 FireCannon();
         }
+
+        //CalculateTrajectoryLine();
     }
 
     private bool IsRaycastCollidingWithEnemy()
     {
         RaycastHit hit;
-        if (!Physics.Raycast(projectileSpawner.position, projectileSpawner.forward, out hit, range, layersToHit))
+        if (!Physics.Raycast(raycastShooter.position, raycastShooter.forward, out hit, range, layersToHit))
         {
             inRange = false;
             return false;
         }
 
-        if (!hit.collider.CompareTag("Enemy"))
+        string tag = task.isOwnedByPlayer ? "Enemy" : "Player";
+        if (!hit.collider.CompareTag(tag))
         {
             inRange = false;
             return false;
@@ -77,10 +93,15 @@ public class Cannon : MonoBehaviour
             return;
 
         //do we have cannonballs?
-        InventorySystem inventory = PlayerManager.instance.inventorySystem;
-        CannonballItem cannonballItem = inventory.FindFirstItemOfClass<CannonballItem>();
-        if (cannonballItem == null)
-            return;
+        CannonballItem cannonballItem = null;
+        if (task.isOwnedByPlayer)
+        {
+            InventorySystem inventory = PlayerManager.instance.inventorySystem;
+            cannonballItem = inventory.FindFirstItemOfClass<CannonballItem>();
+            if (cannonballItem == null)
+                return;
+        }
+        
 
         hasJustFired = true;
 
@@ -144,4 +165,26 @@ public class Cannon : MonoBehaviour
 
         reloadCoroutine = StartCoroutine(Reload());
     }
+
+    /*private void CalculateTrajectoryLine()
+    {
+        lineRenderer.positionCount = (int)numPoints;
+        List<Vector3> points = new List<Vector3>();
+        Vector3 startingPosition = projectileSpawner.position;
+        Vector3 startingVelocity = projectileSpawner.forward * launchForce;
+        for (float t = 0; t < numPoints; t += timeBetweenPoints)
+        {
+            Vector3 newPoint = startingPosition + t * startingVelocity;
+            newPoint.y = startingPosition.y + startingVelocity.y * t + Physics.gravity.y / 2f * t * t;
+            points.Add(newPoint);
+
+            if (Physics.OverlapSphere(newPoint, 2, layersToHit).Length > 0)
+            {
+                lineRenderer.positionCount = points.Count;
+                break;
+            }
+        }
+
+        lineRenderer.SetPositions(points.ToArray());
+    }*/
 }

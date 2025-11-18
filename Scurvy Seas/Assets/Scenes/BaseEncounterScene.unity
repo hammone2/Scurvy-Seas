@@ -558,6 +558,7 @@ MonoBehaviour:
         m_CallState: 2
   enemyPrefabs:
   - {fileID: 6574098890105931055, guid: 4e577d5848d217844be249cb892b64b4, type: 3}
+  - {fileID: 3704949911020844054, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
   enemySpawnPoints:
   - {fileID: 470751881}
   - {fileID: 2044203990}
@@ -981,79 +982,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1001 &448518826
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -44.88592
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 169.2011
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3009644943716493126, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3704949911020844054, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_Name
-      value: EnemyShipTest
-      objectReference: {fileID: 0}
-    - target: {fileID: 5345188236664900275, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5345188236664900275, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5987937178319682838, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5987937178319682838, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5a694deee811f1e4da89fc70d8231f6d, type: 3}
 --- !u!1 &470751880
 GameObject:
   m_ObjectHideFlags: 0
@@ -5863,7 +5791,7 @@ PrefabInstance:
       objectReference: {fileID: 972162308}
     - target: {fileID: 6948434414308813949, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
       propertyPath: HealthValue
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7801556347623082449, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
       propertyPath: m_Enabled
@@ -5907,4 +5835,3 @@ SceneRoots:
   - {fileID: 1364122716}
   - {fileID: 3960181111404817151}
   - {fileID: 1364515308}
-  - {fileID: 448518826}

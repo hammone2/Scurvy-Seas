@@ -196,8 +196,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a252cea8d782c84990d7dabec7c36f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HealthValue: 10
-  damagePopup: {fileID: 0}
+  HealthValue: 20
+  damagePopup: {fileID: 5384250094364689661, guid: df79bade10128f343b28db5f827d37b4, type: 3}
   OnDeath:
     m_PersistentCalls:
       m_Calls:

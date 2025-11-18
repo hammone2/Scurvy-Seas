@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        /*int maxEnemies = enemySpawnPoints.Length;
+        int maxEnemies = enemySpawnPoints.Length;
         int minEnemies = 1;
         List<int> visitedPoints = new List<int>();
         int enemiesToSpawn = Random.Range(minEnemies, maxEnemies);
@@ -41,7 +41,7 @@ public class LevelManager : MonoBehaviour
             int randomEnemyIndex = Random.Range(0,enemyPrefabs.Length);
             GameObject randomEnemy = Instantiate(enemyPrefabs[randomEnemyIndex], 
                 enemySpawnPoints[spawnPointIndex].position, Quaternion.identity);
-        }*/
+        }
 
         if (!GameManager.instance.isNewGame)
         {
