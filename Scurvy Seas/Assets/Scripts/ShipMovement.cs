@@ -58,7 +58,7 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         MoveShip();
         SteerShip();
