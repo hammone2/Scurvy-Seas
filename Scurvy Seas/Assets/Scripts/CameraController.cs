@@ -13,7 +13,7 @@ public class CameraController : MonoBehaviour
     public float maxYOffset;
     public float minYOffset;
 
-    void Update()
+    void LateUpdate()
     {
         Vector3 targetPos = followThis.position + offset;
         transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);

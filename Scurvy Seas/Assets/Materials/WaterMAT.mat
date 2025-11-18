@@ -154,7 +154,7 @@ Material:
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _Specular_Size: 150.9
+    - _Specular_Size: 190
     - _Specular_Speed: -0.33
     - _Specular_Thickness: 7.57
     - _Speed: 0.1

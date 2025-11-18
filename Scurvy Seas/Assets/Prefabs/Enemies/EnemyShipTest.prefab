@@ -250,6 +250,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5463442057820034573, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6948434414308813949, guid: 6f14beed09ab7114fa96ddc0fc497d97, type: 3}
       propertyPath: healthBar
       value: 
