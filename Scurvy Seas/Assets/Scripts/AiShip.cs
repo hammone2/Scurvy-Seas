@@ -32,7 +32,7 @@ public class AiShip : MonoBehaviour
         Invoke("SendCrewToBattleStations", 0.25f);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!target)
             return;
