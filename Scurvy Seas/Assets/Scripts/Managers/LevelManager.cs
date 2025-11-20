@@ -41,6 +41,8 @@ public class LevelManager : MonoBehaviour
             int randomEnemyIndex = Random.Range(0,enemyPrefabs.Length);
             GameObject randomEnemy = Instantiate(enemyPrefabs[randomEnemyIndex], 
                 enemySpawnPoints[spawnPointIndex].position, Quaternion.identity);
+
+            enemies.Add(randomEnemy);
         }
 
         if (!GameManager.instance.isNewGame)
