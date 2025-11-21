@@ -19,7 +19,6 @@ public class SeaMonster : MonoBehaviour, IKillable //have this be a base monster
     private void Start()
     {
         player = PlayerManager.instance.playerShip.transform;
-        LevelManager.instance.AddEnemy(gameObject);
         lootSpawner = GetComponent<LootSpawner>();
     }
 
