@@ -42,7 +42,6 @@ public class MapRoomManager : MonoBehaviour
             alpha = Mathf.MoveTowards(alpha, target, Time.deltaTime);
             fadeColor.a = alpha;
             fade.color = fadeColor;
-            Debug.Log("skibidi");
             yield return null;
         }
         GoToNextLevel();
