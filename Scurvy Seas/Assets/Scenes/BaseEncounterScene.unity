@@ -1918,6 +1918,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SteeringButtonRIGHT
       objectReference: {fileID: 0}
+    - target: {fileID: 2482049532236866152, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3973192815400637171, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
       propertyPath: direction
       value: 1
@@ -2334,6 +2338,10 @@ PrefabInstance:
     - target: {fileID: 2482049532236866152, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
       propertyPath: m_Name
       value: SteeringButtonLEFT
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482049532236866152, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3973192815400637171, guid: ec80b90ec5458074a8f8715f7294a60a, type: 3}
       propertyPath: direction
@@ -4323,7 +4331,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 24.8, z: -15}
   followThis: {fileID: 820473144}
-  moveSpeed: 14
+  moveSpeed: 7
+  scrollSpeed: 10
   radiusClamp: 100
   maxYOffset: 100
   minYOffset: 10
@@ -4521,7 +4530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 0
-    m_WrapAround: 0
+    m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}

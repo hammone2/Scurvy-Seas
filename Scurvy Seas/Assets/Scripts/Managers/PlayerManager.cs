@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
@@ -69,6 +70,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Update()
     {
+        float moveDir = Input.GetAxis("Horizontal");
+        HandleSteer((int)moveDir);
+
+        ControlThrustSlider();
+        
+
         if (steeringDirection != 0)
         {
             float currentAngle = Mathf.DeltaAngle(0, wheelSprite.transform.eulerAngles.z);
@@ -109,10 +116,21 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    
     public void HandleSteer(int direction)
     {
         steeringDirection = -direction;
         playerShip.HandleSteer(-direction);
+    }
+
+    private void ControlThrustSlider()
+    {
+        float step = 0.001f;
+
+        if (Input.GetKey(KeyCode.W))
+            sailSlider.value = Mathf.Clamp(sailSlider.value + step, sailSlider.minValue, sailSlider.maxValue);
+        if (Input.GetKey(KeyCode.S))
+            sailSlider.value = Mathf.Clamp(sailSlider.value - step, sailSlider.minValue, sailSlider.maxValue);
     }
 
     public void HandleThrust()
