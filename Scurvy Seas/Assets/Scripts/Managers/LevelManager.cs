@@ -3,6 +3,8 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using NUnit.Framework.Interfaces;
+using UnityEngine.UI;
+using System.Collections;
 
 public class LevelManager : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class LevelManager : MonoBehaviour
 
     [SerializeField] private GameObject[] enemyPrefabs; //array of spawnable enemies
     [SerializeField] private Transform[] enemySpawnPoints;
+    [SerializeField] Image fade;
 
     private void Awake()
     {
@@ -55,22 +58,27 @@ public class LevelManager : MonoBehaviour
             //Set starting defaults
             InventorySystem inventory = InventorySystem.instance;
             inventory.gold = 1000;
-            GameObject cannonballs = Resources.Load<GameObject>("Cannonball");
-            inventory.PickUpItem(cannonballs);
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject cannonballs = Resources.Load<GameObject>("Cannonball");
+                inventory.PickUpItem(cannonballs);
+            }
         }
+
+        StartCoroutine(FadeOut());
     }
 
     public void NextEncounter()
     {
         SaveGame();
-
-        Invoke("LoadNextScene", 2f);
+        StartCoroutine(FadeIn());
     }
 
     public void Retreat()
     {
         SaveGame();
-        Invoke("MoveBackLevel", 1f);
+        StartCoroutine(FadeIn());
+        Invoke("MoveBackLevel", 3f);
     }
 
     private void MoveBackLevel()
@@ -80,7 +88,7 @@ public class LevelManager : MonoBehaviour
 
     private void LoadNextScene()
     {
-        GameManager.instance.NextLevel(SceneManager.GetActiveScene().name);
+        GameManager.instance.NextLevel();
     }
 
     public void AddEnemy(GameObject enemy)
@@ -114,5 +122,38 @@ public class LevelManager : MonoBehaviour
             PlayerManager.instance.playerShip.Load(saveData);
             PlayerManager.instance.inventorySystem.Load(saveData);
         }
+    }
+
+    private IEnumerator FadeIn()
+    {
+        fade.gameObject.SetActive(true);
+        Color fadeColor = fade.color;
+        float alpha = fadeColor.a;
+        int target = 1;
+
+        while (alpha < target)
+        {
+            alpha = Mathf.MoveTowards(alpha, target, Time.deltaTime);
+            fadeColor.a = alpha;
+            fade.color = fadeColor;
+            yield return null;
+        }
+        LoadNextScene();
+    }
+
+    private IEnumerator FadeOut()
+    {
+        Color fadeColor = fade.color;
+        float alpha = fadeColor.a;
+        int target = 0;
+
+        while (alpha > target)
+        {
+            alpha = Mathf.MoveTowards(alpha, target, Time.deltaTime);
+            fadeColor.a = alpha;
+            fade.color = fadeColor;
+            yield return null;
+        }
+        fade.gameObject.SetActive(false);
     }
 }

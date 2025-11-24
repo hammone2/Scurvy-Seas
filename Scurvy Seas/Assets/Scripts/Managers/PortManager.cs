@@ -11,7 +11,7 @@ public class PortManager : MonoBehaviour
     {
         SaveInventoryData();
 
-        GameManager.instance.NextLevel("BaseEncounterScene");
+        GameManager.instance.NextLevel();
     }
 
     public void LoadInventoryData()
