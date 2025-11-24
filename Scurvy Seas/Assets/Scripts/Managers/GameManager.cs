@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isNewGame = false;
-    private int levelIterations = 1;
+    private int levelIterations = 7;
     private int currentLevelIteration = 1;
 
 
@@ -20,22 +20,19 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void NextLevel(string levelName)
+    public void GoToMapScreen()
+    {
+        SceneManager.LoadScene("TreasureMapScene");
+    }
+
+    public void NextLevel()
     {
         currentLevelIteration++;
-        if (currentLevelIteration > levelIterations)
-        {
-            //go to tavern
-            currentLevelIteration = 0;
-            SceneManager.LoadScene("Port");
-
-            return;
-        }
 
         if (isNewGame)
             isNewGame = false;
 
-        SceneManager.LoadScene(levelName);
+        GoToMapScreen();
     }
 
     public void Retreat()
@@ -43,7 +40,20 @@ public class GameManager : MonoBehaviour
         if (currentLevelIteration > 1)
             currentLevelIteration--;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        GoToMapScreen();
+    }
+
+    public void GoToNextLevel()
+    {
+        if (currentLevelIteration % levelIterations == 0)
+        {
+            //go to tavern
+            SceneManager.LoadScene("Port");
+
+            return;
+        }
+
+        SceneManager.LoadScene("BaseEncounterScene");
     }
 
     public int GetCurrentLevel()
