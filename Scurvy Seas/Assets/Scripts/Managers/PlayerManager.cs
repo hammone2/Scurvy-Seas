@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
     public int steeringDirection;
     public TextMeshProUGUI degreesText;
+    [SerializeField] private GameObject shipUI;
     [SerializeField] float rotationSpeed;
     [SerializeField] GameObject wheelSprite;
     [SerializeField] Slider sailSlider;
@@ -215,6 +216,16 @@ public class PlayerManager : MonoBehaviour
     public void SetIsInventoryOpen()
     {
         isInventoryOpen = !isInventoryOpen;
+    }
+
+    public bool GetIsInventoryOpen()
+    {
+        return isInventoryOpen;
+    }
+
+    public void ToggleShipHUD()
+    {
+        shipUI.SetActive(!shipUI.activeInHierarchy);
     }
 
     public void ActivateNextLevelButton()
