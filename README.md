@@ -3,13 +3,16 @@
 Download: https://mind-virus-interactive.itch.io/scurvy-seas-indev
 
 
-# v0.2.1 Changelog:
+# v0.2.2 Changelog:
 
 - New Features:
-  - The Player now has a stack of cannonballs in their inventory when starting a new game.
-  - Shop items are now randomized.
-  - Enemy item drops are now randomized.
-  - Added enemy ship AI + combat.
+  - Improved Controls:
+    - WASD now moves the ship.
+    - The camera now uses click and drag to move.
+      
+  - Added a minimap to the HUD.
+  - Added treasure map cutscene.
 
 - Bug Fixes:
-  - N/A
+  - Fixed ship hitboxes.
+  - Fixed enemy ships not being added to enemy list.
