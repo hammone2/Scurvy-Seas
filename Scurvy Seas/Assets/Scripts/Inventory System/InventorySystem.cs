@@ -66,6 +66,7 @@ public class InventorySystem : MonoBehaviour
             PlayerManager.instance.inventoryCamera.gameObject.SetActive(!inventoryUI.activeInHierarchy);
 
         inventoryUI.SetActive(!inventoryUI.activeInHierarchy);
+        PlayerManager.instance.ToggleShipHUD();
     }
 
     public bool HasEnoughStorage(int itemSize)

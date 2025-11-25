@@ -20,6 +20,9 @@ public class CameraController : MonoBehaviour
         Vector3 targetPos = followThis.position + offset;
         transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
 
+        if (PlayerManager.instance.GetIsInventoryOpen() == true)
+            return;
+
         //Zoom
         float scroll = Input.GetAxis("Mouse ScrollWheel");
         if (scroll != 0)

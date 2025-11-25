@@ -143,6 +143,7 @@ public class LevelManager : MonoBehaviour
 
     private IEnumerator FadeOut()
     {
+        fade.gameObject.SetActive(true);
         Color fadeColor = fade.color;
         float alpha = fadeColor.a;
         int target = 0;
