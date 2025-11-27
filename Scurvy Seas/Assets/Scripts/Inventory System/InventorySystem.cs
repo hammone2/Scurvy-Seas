@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.UI;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -26,6 +27,13 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private GameObject sellButton;
     [SerializeField] private GameObject dropButton;
     [SerializeField] private GameObject consumeButton;
+
+
+    //item stack selection stuff
+    [SerializeField] private GameObject stackSelectionUI;
+    [SerializeField] private TextMeshProUGUI selectedStackText;
+    [SerializeField] private Slider stackSlider;
+    private int selectedStackAmount;
 
     //Gold stuff
     [SerializeField] private TextMeshProUGUI goldText;
@@ -87,9 +95,19 @@ public class InventorySystem : MonoBehaviour
 
     public void AddItem(InventoryItem item)
     {
-        items.Add(item);
+        if (item.isStackable)
+        {
+            InventoryItem existingItem = FindFirstItemOfPath(item.prefabPath);
 
-        //put stacking to existing item of same type here later
+            if (existingItem != null)
+            {
+                existingItem.SetStack(existingItem.stack + item.stack);
+                Destroy(item.gameObject);
+                return;
+            }
+        }
+
+        items.Add(item);
 
         currentStorageUsed += item.itemSize;
         UpdateStorageText();
@@ -102,6 +120,12 @@ public class InventorySystem : MonoBehaviour
 
         GameObject itemDrop = Instantiate(selectedItem.GetItemDropPrefab());
         PlayerManager.instance.playerShip.ThrowItemOverboard(itemDrop);
+
+        if (selectedItem.isStackable)
+        {
+            selectedItem.SetStack(selectedItem.stack - selectedStackAmount); //SetStack will automatically handle item deletion so we're returning
+            return;
+        }
 
         DeleteItem(selectedItem);
     }
@@ -154,6 +178,18 @@ public class InventorySystem : MonoBehaviour
         }
 
         return null; //nothing found
+    }
+
+    public InventoryItem FindFirstItemOfPath(string compareString)
+    {
+        for (int i = 0; i < items.Count; i++)
+        {
+            InventoryItem item = items[i].GetComponent<InventoryItem>();
+
+            if (item.prefabPath == compareString)
+                return item;
+        }
+        return null;
     }
 
     public InventoryData Save()
@@ -237,6 +273,11 @@ public class InventorySystem : MonoBehaviour
                 consumeButton.SetActive(false);
         }
 
+        if (item.isStackable)
+            OnStackableItemSelected(item);
+        else
+            stackSelectionUI.SetActive(false);
+
         displayItem = Instantiate(item.GetItemDropPrefab(), itemDisplayArea.position, Quaternion.identity);
         displayItem.GetComponent<ItemDrop>().canBePickedUp = false;
         displayItem.GetComponent<Outline>().enabled = false;
@@ -247,10 +288,31 @@ public class InventorySystem : MonoBehaviour
         itemValueText.SetText("Value: "+item.itemValue.ToString());
     }
 
+    private void OnStackableItemSelected(InventoryItem item)
+    {
+        stackSelectionUI.SetActive(true);
+        stackSlider.value = 1;
+        OnStackSliderChanged();
+
+        stackSlider.maxValue = item.stack;
+    }
+
+    public void OnStackSliderChanged()
+    {
+        selectedStackText.SetText(stackSlider.value.ToString());
+        selectedStackAmount = (int)stackSlider.value;
+    }
+
+    public int GetSelectedStackAmount()
+    {
+        return selectedStackAmount;
+    }
+
     public void RemoveDisplayItem()
     {
         Destroy(displayItem);
         selectedItem = null;
+        stackSelectionUI.SetActive(false);
         itemInfo.SetActive(false);
     }
 
@@ -262,5 +324,10 @@ public class InventorySystem : MonoBehaviour
     public Transform GetInventoryContent()
     {
         return inventoryContent;
+    }
+
+    public bool GetIsShopping()
+    {
+        return isShopping;
     }
 }
