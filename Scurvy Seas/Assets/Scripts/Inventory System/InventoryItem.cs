@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using static UnityEngine.Rendering.DebugUI;
 
 public class InventoryItem : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class InventoryItem : MonoBehaviour
     public int itemValue = 1;
     public bool isStackable = false;
     public bool isConsumable = false;
+    [HideInInspector] public bool isOwnedByShop = false;
     public int stack = 0;
     [SerializeField] private string itemName;
     [SerializeField] private TextMeshProUGUI stacktext;
@@ -22,6 +24,8 @@ public class InventoryItem : MonoBehaviour
     {
         if (!isStackable)
             stacktext.gameObject.SetActive(false);
+        else
+            stacktext.SetText(stack.ToString());
 
         nameText.SetText(itemName);
     }
@@ -45,11 +49,22 @@ public class InventoryItem : MonoBehaviour
         stack = value;
 
         if (stack <= 0)
-            InventorySystem.instance.DeleteItem(this);
+        {
+            if (InventorySystem.instance.GetIsShopping() == true)
+            {
+                if (!isOwnedByShop) { InventorySystem.instance.RemoveItem(this); }
+            }
+            else
+            {
+                InventorySystem.instance.DeleteItem(this);
+            }
+        }    
     }
 
     public string GetName()
     {
+        if (isStackable)
+            return itemName + " (" + stack.ToString() + ")";
         return itemName;
     }
 }

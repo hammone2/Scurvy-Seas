@@ -28,6 +28,10 @@ PrefabInstance:
       propertyPath: isStackable
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5873202785398176516, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: m_text
+      value: 128
+      objectReference: {fileID: 0}
     - target: {fileID: 5894422697024669654, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: m_Name
       value: Cannonball
