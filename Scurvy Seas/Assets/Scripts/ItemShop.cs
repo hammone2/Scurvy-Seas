@@ -83,7 +83,9 @@ public class ItemShop : MonoBehaviour
             }
         }
         else
+        {
             items.Remove(item);
+        }
 
         inventory.AddItem(item);
         item.transform.SetParent(inventory.GetInventoryContent());
@@ -115,7 +117,9 @@ public class ItemShop : MonoBehaviour
                 inventory.RemoveItem(item);
         }
         else
+        {
             inventory.RemoveItem(item);
+        }
 
         inventory.gold += item.itemValue;
         gold -= item.itemValue;

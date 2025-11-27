@@ -52,10 +52,12 @@ public class InventoryItem : MonoBehaviour
         {
             if (InventorySystem.instance.GetIsShopping() == true)
             {
-                if (!isOwnedByShop) InventorySystem.instance.RemoveItem(this);
+                if (!isOwnedByShop) { InventorySystem.instance.RemoveItem(this); }
             }
             else
+            {
                 InventorySystem.instance.DeleteItem(this);
+            }
         }    
     }
 
