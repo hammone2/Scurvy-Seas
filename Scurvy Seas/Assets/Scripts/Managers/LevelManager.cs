@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
     public UnityEvent OnEncounterComplete;
     private List<GameObject> enemies = new List<GameObject>();
 
+    [SerializeField] private GameObject nextLevelButton;
     [SerializeField] private GameObject[] enemyPrefabs; //array of spawnable enemies
     [SerializeField] private Transform[] enemySpawnPoints;
     [SerializeField] Image fade;
@@ -72,6 +73,7 @@ public class LevelManager : MonoBehaviour
     {
         SaveGame();
         StartCoroutine(FadeIn());
+        Destroy(nextLevelButton);
     }
 
     public void Retreat()
