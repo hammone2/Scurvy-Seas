@@ -6,7 +6,7 @@ public class Damagable : MonoBehaviour
 {
     [SerializeField] private float HealthValue = 100f;
     [SerializeField] private GameObject damagePopup;
-
+    
     private float _health;
     public float health
     {
@@ -28,6 +28,9 @@ public class Damagable : MonoBehaviour
 
 
     public UnityEvent OnDeath;
+    public event System.Action<float> OnDamageTaken = delegate (float f) { };
+    public event System.Action<float> OnHealed = delegate (float f) { };
+
     [SerializeField] private Healthbar healthBar;
 
 
@@ -50,6 +53,8 @@ public class Damagable : MonoBehaviour
 
         if (health <= 0)
             OnDeath?.Invoke();
+
+        OnDamageTaken(damage);
     }
 
     public void Heal(float _health)
@@ -57,6 +62,8 @@ public class Damagable : MonoBehaviour
         health += _health;
         if (health > HealthValue)
             health = HealthValue;
+
+        OnHealed(_health);
     }
 
     private void OnCollisionEnter(Collision collision)

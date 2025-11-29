@@ -49,9 +49,9 @@ public class Cannon : MonoBehaviour
     {
         rangeIndicator.transform.localPosition = new Vector3(0f,0.5f,range);
 
-        /*/if (!task.isOwnedByPlayer)
+        /*if (!task.isOwnedByPlayer)
             return;
-
+        
         lineRenderer = GetComponent<LineRenderer>();
         CalculateTrajectoryLine();*/
     }
@@ -115,6 +115,8 @@ public class Cannon : MonoBehaviour
 
         if (task.isOwnedByPlayer)
         {
+            CameraController.instance.cameraShake.ScreenShake(0.5f);
+
             InventoryItem item = cannonballItem.GetComponent<InventoryItem>();
             int stackValue = item.stack - 1;
             item.SetStack(stackValue);
