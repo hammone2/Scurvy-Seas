@@ -56,6 +56,12 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
                 taskStation.ConnectVisibilityEvent(isOwnedByPlayer);
             }
         }
+
+        //shake the camera when damage is taken if this is the player
+        if (isOwnedByPlayer)
+        {
+            damagableComponent.OnDamageTaken += CameraController.instance.cameraShake.ScreenShake;
+        }
     }
 
     void FixedUpdate()

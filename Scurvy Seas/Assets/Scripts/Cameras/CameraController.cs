@@ -12,6 +12,17 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float maxYOffset;
     [SerializeField] private float minYOffset;
 
+    public CameraShake cameraShake;
+
+    public static CameraController instance;
+
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+
     void LateUpdate()
     {
         //apply offset and clamp position
