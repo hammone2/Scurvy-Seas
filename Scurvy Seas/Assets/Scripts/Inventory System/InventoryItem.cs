@@ -20,6 +20,10 @@ public class InventoryItem : MonoBehaviour
 
     public UnityEvent OnConsumed;
 
+    public bool hasStatusEffect;
+    public UnityEvent ApplyEffects;
+    public UnityEvent RemoveEffects;
+
     private void Awake()
     {
         if (!isStackable)
