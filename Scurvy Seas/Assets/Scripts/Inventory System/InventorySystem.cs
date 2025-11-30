@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class InventorySystem : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class InventorySystem : MonoBehaviour
 
     private GameObject displayItem;
     [SerializeField] private Transform itemDisplayArea;
+    [SerializeField] private Transform itemDisplayOffset;
 
     [SerializeField] private bool isShopping = false;
     [SerializeField] private GameObject buyButton;
@@ -68,6 +70,20 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        //spin the item around
+        if (selectedItem != null)
+        {
+            itemDisplayArea.Rotate(Vector3.up * Time.deltaTime * 70f);
+
+            float floatAmount = 0.1f; // Amount of floating
+            float floatInterval = 2f; // Time interval for floating up/down
+            float newYPos = floatAmount * Mathf.Sin(Time.time * floatInterval);
+            itemDisplayArea.localPosition = new Vector3(itemDisplayArea.localPosition.x, newYPos, itemDisplayArea.localPosition.z);
+        }
+    }
+
     public void ToggleInventory()
     {
         if (PlayerManager.instance != null)
@@ -105,6 +121,11 @@ public class InventorySystem : MonoBehaviour
                 Destroy(item.gameObject);
                 return;
             }
+        }
+
+        if (item.hasStatusEffect)
+        {
+            item.ApplyEffects?.Invoke();
         }
 
         items.Add(item);
@@ -155,6 +176,11 @@ public class InventorySystem : MonoBehaviour
         items.Remove(inventoryItem);
         RemoveDisplayItem();
         UpdateStorageText();
+
+        if (inventoryItem.hasStatusEffect)
+        {
+            inventoryItem.RemoveEffects?.Invoke();
+        }
     }
 
     public void DeleteItem(InventoryItem inventoryItem)
@@ -231,6 +257,9 @@ public class InventorySystem : MonoBehaviour
                 if (inventoryItem.isStackable)
                     inventoryItem.SetStack(itemData.Stack);
 
+                if (inventoryItem.hasStatusEffect)
+                    inventoryItem.ApplyEffects?.Invoke();
+
                 currentStorageUsed += inventoryItem.itemSize;
                 UpdateStorageText();
             }
@@ -278,7 +307,8 @@ public class InventorySystem : MonoBehaviour
         else
             stackSelectionUI.SetActive(false);
 
-        displayItem = Instantiate(item.GetItemDropPrefab(), itemDisplayArea.position, Quaternion.identity);
+        displayItem = Instantiate(item.GetItemDropPrefab(), itemDisplayOffset);
+        displayItem.transform.localPosition = Vector3.zero;
         displayItem.GetComponent<ItemDrop>().canBePickedUp = false;
         displayItem.GetComponent<Outline>().enabled = false;
         displayItem.layer = LayerMask.NameToLayer("Inventory");

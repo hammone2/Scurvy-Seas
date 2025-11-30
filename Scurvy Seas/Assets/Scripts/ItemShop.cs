@@ -67,6 +67,9 @@ public class ItemShop : MonoBehaviour
         if (inventory.gold - item.itemValue < 0)
             return;
 
+        if (!inventory.HasEnoughStorage(item.itemSize))
+            return;
+
         bool itemCanBeDisplayed = true;
 
         if (item.isStackable)

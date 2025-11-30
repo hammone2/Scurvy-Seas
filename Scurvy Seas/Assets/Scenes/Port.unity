@@ -1994,6 +1994,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1039559535}
     - target: {fileID: 2831942869220900900, guid: 48543f995257cb547be4f81503625a8a, type: 3}
+      propertyPath: itemDisplayOffset
+      value: 
+      objectReference: {fileID: 1788486107}
+    - target: {fileID: 2831942869220900900, guid: 48543f995257cb547be4f81503625a8a, type: 3}
       propertyPath: selectedStackText
       value: 
       objectReference: {fileID: 1039559533}
@@ -2230,6 +2234,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09dc542cc88d757409ae45ffab1f3f48, type: 3}
+--- !u!4 &1788486107 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2180336209106257326, guid: 09dc542cc88d757409ae45ffab1f3f48, type: 3}
+  m_PrefabInstance: {fileID: 1788486106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1978747375
 GameObject:
   m_ObjectHideFlags: 0
