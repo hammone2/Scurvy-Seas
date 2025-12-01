@@ -17,6 +17,7 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
     private Rigidbody rb;
     private List<NavMeshAgent> agentsOnShip = new List<NavMeshAgent>();
     private List<Task> taskStations = new List<Task>();
+    private List<Cannon> cannons = new List<Cannon>();
 
     private PlayerManager playerManager; //might change this to a conroller base class that AIShip and PlayerManager inherit from
 
@@ -55,6 +56,10 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
                 taskStation.isOwnedByPlayer = isOwnedByPlayer;
                 taskStation.ConnectVisibilityEvent(isOwnedByPlayer);
             }
+
+            Cannon cannon = obj.GetComponent<Cannon>();
+            if (cannon)
+                cannons.Add(cannon);
         }
 
         //shake the camera when damage is taken if this is the player
@@ -149,6 +154,11 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
         damagableComponent.Heal(amount);
     }
 
+    public void SetMaxHealth(float maxHealth)
+    {
+        damagableComponent.SetMaxHealth(maxHealth);
+    }
+
     public void Die()
     {
         if (isOwnedByPlayer)
@@ -168,6 +178,11 @@ public class ShipMovement : MonoBehaviour, IKillable //add a ship base class lat
     public List<Task> GetTaskStations()
     {
         return taskStations;
+    }
+
+    public List<Cannon> GetCannons()
+    {
+        return cannons;
     }
 
     public ShipData Save()

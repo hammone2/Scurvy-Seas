@@ -25,6 +25,10 @@ PrefabInstance:
       value: MagicSailItem
       objectReference: {fileID: 0}
     - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: description
+      value: Increased max speed at the cost of -7 max HP.
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: hasStatusEffect
       value: 1
       objectReference: {fileID: 0}
@@ -193,5 +197,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1563389c77b061f40b34cbd6ddb0480b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthModifier: 0
+  maxHealthModifier: -7
   maxSpeedModifier: 400

@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Damager : MonoBehaviour
 {
-    [SerializeField] private float damage;
+    [HideInInspector] public float damage;
 
     public float GetDamage()
     {

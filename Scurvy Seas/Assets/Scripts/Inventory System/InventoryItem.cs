@@ -10,6 +10,7 @@ public class InventoryItem : MonoBehaviour
     public string prefabPath;
     public int itemSize = 1;
     public int itemValue = 1;
+    public string description;
     public bool isStackable = false;
     public bool isConsumable = false;
     [HideInInspector] public bool isOwnedByShop = false;

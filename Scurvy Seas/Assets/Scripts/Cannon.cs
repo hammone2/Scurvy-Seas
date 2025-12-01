@@ -7,6 +7,7 @@ public class Cannon : MonoBehaviour
 {
     public Task task;
     public GameObject cannonBallPrefab;
+    public int damage = 1;
 
     private bool hasJustFired = false;
 
@@ -110,6 +111,7 @@ public class Cannon : MonoBehaviour
         if (ball.GetComponent<Rigidbody>())
             ball.GetComponent<Rigidbody>().AddForce(projectileSpawner.forward * launchForce, ForceMode.VelocityChange); //implement a range calculation later using the salvaged steel artillery code
 
+        ball.GetComponent<Projectile>().SetDamage(damage);
 
         particles.Play();
 
