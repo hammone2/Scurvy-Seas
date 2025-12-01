@@ -14,6 +14,7 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI itemNameInfo;
     [SerializeField] private TextMeshProUGUI itemSizeText;
     [SerializeField] private TextMeshProUGUI itemValueText;
+    [SerializeField] private TextMeshProUGUI descriptionText;
     [SerializeField] private TextMeshProUGUI currentStorageText;
     public int storageSize = 100;
     [HideInInspector] public int currentStorageUsed = 0;
@@ -102,10 +103,14 @@ public class InventorySystem : MonoBehaviour
         return true;
     }
 
-    public void PickUpItem(GameObject newItem)
+    public void PickUpItem(GameObject newItem, int stack = 0)
     {
         GameObject pickedUpItem = Instantiate(newItem, inventoryContent);
         InventoryItem inventoryItem = pickedUpItem.GetComponent<InventoryItem>();
+
+        if (stack != 0)
+            inventoryItem.stack = stack;
+
         AddItem(inventoryItem);
     }
 
@@ -144,9 +149,12 @@ public class InventorySystem : MonoBehaviour
 
         if (selectedItem.isStackable)
         {
+            itemDrop.GetComponent<ItemDrop>().DropItem(selectedItem, selectedStackAmount);
             selectedItem.SetStack(selectedItem.stack - selectedStackAmount); //SetStack will automatically handle item deletion so we're returning
             return;
         }
+
+        itemDrop.GetComponent<ItemDrop>().DropItem(selectedItem);
 
         DeleteItem(selectedItem);
     }
@@ -316,6 +324,7 @@ public class InventorySystem : MonoBehaviour
         itemNameInfo.SetText(item.GetName());
         itemSizeText.SetText("Size: "+item.itemSize.ToString());
         itemValueText.SetText("Value: "+item.itemValue.ToString());
+        descriptionText.SetText(item.description);
     }
 
     private void OnStackableItemSelected(InventoryItem item)

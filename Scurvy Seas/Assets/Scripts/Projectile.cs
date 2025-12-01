@@ -10,6 +10,11 @@ public class Projectile : MonoBehaviour
         Invoke("Despawn", 3f);
     }
 
+    public void SetDamage(int amount)
+    {
+        GetComponent<Damager>().damage = amount;
+    }
+
     private void Despawn()
     {
         if (trail)

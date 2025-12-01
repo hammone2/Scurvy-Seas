@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3815042378447022647
+--- !u!1001 &425533435049941856
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -8,37 +8,89 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3932073372244058537, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
-      propertyPath: m_text
-      value: Cannonball
-      objectReference: {fileID: 0}
-    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
-      propertyPath: stack
-      value: 32
-      objectReference: {fileID: 0}
     - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: itemName
-      value: Cannonball
+      value: Cursed Medallion
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: itemSize
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: itemValue
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: prefabPath
-      value: Cannonball
+      value: CursedMedallionItem
       objectReference: {fileID: 0}
     - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: description
-      value: Standard cannonball that deals 1 damage.
+      value: +2 Bonus damage to all weapons, -5 max Ship HP.
       objectReference: {fileID: 0}
     - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
-      propertyPath: isStackable
+      propertyPath: hasStatusEffect
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5873202785398176516, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
-      propertyPath: m_text
-      value: 128
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: ApplyEffects.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: RemoveEffects.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: ApplyEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: RemoveEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: ApplyEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3047884573596027226}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: RemoveEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3047884573596027226}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: ApplyEffects.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: ApplyEffects.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ApplyEffects
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: RemoveEffects.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: RemoveEffects.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RemoveEffects
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: ApplyEffects.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CursedMedallionItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: RemoveEffects.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CursedMedallionItem, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: ApplyEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: RemoveEffects.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5894422697024669654, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: m_Name
-      value: Cannonball
+      value: CursedMedallionItem
       objectReference: {fileID: 0}
     - target: {fileID: 9093001857320825911, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: m_Pivot.x
@@ -126,22 +178,24 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5894422697024669654, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8941147992219396559}
+      addedObject: {fileID: 3047884573596027226}
   m_SourcePrefab: {fileID: 100100000, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
---- !u!1 &7294972549149142497 stripped
+--- !u!1 &6064939472323337398 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5894422697024669654, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
-  m_PrefabInstance: {fileID: 3815042378447022647}
+  m_PrefabInstance: {fileID: 425533435049941856}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8941147992219396559
+--- !u!114 &3047884573596027226
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7294972549149142497}
+  m_GameObject: {fileID: 6064939472323337398}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3070a40946931e145b44c2fc92e12c10, type: 3}
+  m_Script: {fileID: 11500000, guid: c2613ac19e7b5ca4a8cc1ad6dacf40e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageModifier: 2
+  maxHealthModifier: -5

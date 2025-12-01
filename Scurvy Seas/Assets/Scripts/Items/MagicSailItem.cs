@@ -8,10 +8,12 @@ public class MagicSailItem : MonoBehaviour
     public void ApplyEffects()
     {
         PlayerManager.instance.playerShip.moveSpeed += maxSpeedModifier;
+        PlayerManager.instance.playerShip.SetMaxHealth(maxHealthModifier);
     }
 
     public void RemoveEffects()
     {
         PlayerManager.instance.playerShip.moveSpeed -= maxSpeedModifier;
+        PlayerManager.instance.playerShip.SetMaxHealth(-maxHealthModifier);
     }
 }

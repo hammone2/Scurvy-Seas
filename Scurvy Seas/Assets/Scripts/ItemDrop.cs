@@ -1,10 +1,11 @@
-using System.Net.Http.Headers;
+using NUnit.Framework.Interfaces;
 using UnityEngine;
 
 public class ItemDrop : MonoBehaviour
 {
     [SerializeField] private int itemSize = 1;
     [SerializeField] private int itemValue = 1;
+    [SerializeField] private int stack;
     [SerializeField] private Outline outline;
     [SerializeField] private GameObject textPopup;
     
@@ -31,6 +32,16 @@ public class ItemDrop : MonoBehaviour
         canBePickedUp = false;
     }
 
+    public void DropItem(InventoryItem item, int stack = 0)
+    {
+        if (stack == 0) //no override was passed
+            this.stack = item.stack;
+        else
+            this.stack = stack;
+
+        inventoryItemPrefab = Resources.Load<GameObject>(item.prefabPath);
+    }
+
     public virtual void PickUpItem()
     {
         if (!canBePickedUp)
@@ -42,7 +53,10 @@ public class ItemDrop : MonoBehaviour
         if (!inventory.HasEnoughStorage(itemSize))
             return;
 
-        inventory.PickUpItem(inventoryItemPrefab);
+        if (stack > 0)
+            inventory.PickUpItem(inventoryItemPrefab, stack);
+        else
+            inventory.PickUpItem(inventoryItemPrefab);
 
         TextPopup popup = Instantiate(textPopup, transform.position, Quaternion.identity).GetComponent<TextPopup>();
         popup.SetTextValue("Picked up " + name, 8, Color.white, 1.5f, 10f);

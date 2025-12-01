@@ -21,6 +21,10 @@ PrefabInstance:
       value: RepairKitItem
       objectReference: {fileID: 0}
     - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: description
+      value: 'On consume: +10 Ship HP'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: isConsumable
       value: 1
       objectReference: {fileID: 0}
@@ -169,4 +173,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33f206f38dab94b4e96b56bdd23f3221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healAmount: 25
+  healAmount: 10

@@ -66,6 +66,16 @@ public class Damagable : MonoBehaviour
         OnHealed(_health);
     }
 
+    public void SetMaxHealth(float _maxHealthModifier)
+    {
+        HealthValue += _maxHealthModifier; //add or remove
+        
+        if (health > HealthValue)
+            health = HealthValue;
+
+        healthBar.SetMaxHealth(HealthValue);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Damager damager = collision.gameObject.GetComponent<Damager>();
