@@ -70,6 +70,9 @@ public class ItemShop : MonoBehaviour
         if (!inventory.HasEnoughStorage(item.itemSize))
             return;
 
+        if (item.isStackable && inventory.gold - inventory.GetSelectedStackAmount() * item.itemValue < 0)
+            return;
+
         bool itemCanBeDisplayed = true;
 
         if (item.isStackable)
@@ -84,10 +87,14 @@ public class ItemShop : MonoBehaviour
             {
                 items.Remove(item);
             }
+            inventory.gold -= item.itemValue * item.stack;
+            gold += item.itemValue * item.stack;
         }
         else
         {
             items.Remove(item);
+            inventory.gold -= item.itemValue;
+            gold += item.itemValue;
         }
 
         inventory.AddItem(item);
@@ -97,8 +104,8 @@ public class ItemShop : MonoBehaviour
         if (itemCanBeDisplayed)
             inventory.DisplayItem(item);
 
-        inventory.gold -= item.itemValue;
-        gold += item.itemValue;
+        //inventory.gold -= item.itemValue;
+        //gold += item.itemValue;
     }
 
     public void SellItem()
@@ -111,6 +118,9 @@ public class ItemShop : MonoBehaviour
         if (gold - item.itemValue < 0)
             return;
 
+        if (item.isStackable && gold - inventory.GetSelectedStackAmount() * item.itemValue < 0)
+            return;
+
         if (item.isStackable)
         {
             InventoryItem newItem = GetSplitStack(item, inventory);
@@ -118,14 +128,16 @@ public class ItemShop : MonoBehaviour
                 item = newItem;
             else
                 inventory.RemoveItem(item);
+
+            inventory.gold += item.itemValue * item.stack;
+            gold -= item.itemValue * item.stack;
         }
         else
         {
             inventory.RemoveItem(item);
+            inventory.gold += item.itemValue;
+            gold -= item.itemValue;
         }
-
-        inventory.gold += item.itemValue;
-        gold -= item.itemValue;
 
         InventoryItem existingItem = FindFirstItemOfPath(item.prefabPath);
         if (existingItem != null)

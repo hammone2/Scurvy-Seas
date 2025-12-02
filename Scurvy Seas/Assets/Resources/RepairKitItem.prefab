@@ -17,6 +17,14 @@ PrefabInstance:
       value: Repair Kit
       objectReference: {fileID: 0}
     - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: itemSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
+      propertyPath: itemValue
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446118824230270872, guid: 82af687bdeb38174f9132da682d3e32d, type: 3}
       propertyPath: prefabPath
       value: RepairKitItem
       objectReference: {fileID: 0}
