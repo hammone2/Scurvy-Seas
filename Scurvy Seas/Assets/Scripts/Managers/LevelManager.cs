@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     private List<GameObject> enemies = new List<GameObject>();
 
     [SerializeField] private GameObject nextLevelButton;
+    [SerializeField] private GameObject tutorial;
     [SerializeField] private GameObject[] enemyPrefabs; //array of spawnable enemies
     [SerializeField] private Transform[] enemySpawnPoints;
     [SerializeField] Image fade;
@@ -53,6 +54,9 @@ public class LevelManager : MonoBehaviour
         {
             //Load save data
             Invoke("LoadGame", 1f);
+
+            //remove tutorial
+            Destroy(tutorial);
         }
         else
         {
