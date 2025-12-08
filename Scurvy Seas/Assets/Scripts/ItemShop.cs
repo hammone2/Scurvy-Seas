@@ -10,6 +10,7 @@ public class ItemShop : MonoBehaviour
 {
     [SerializeField] private Transform shopContent;
     [SerializeField] private LootSpawner lootSpawner;
+    [SerializeField] private AudioSource coinSFX;
     
     //Gold stuff
     [SerializeField] private TextMeshProUGUI goldText;
@@ -104,8 +105,7 @@ public class ItemShop : MonoBehaviour
         if (itemCanBeDisplayed)
             inventory.DisplayItem(item);
 
-        //inventory.gold -= item.itemValue;
-        //gold += item.itemValue;
+        coinSFX.Play();
     }
 
     public void SellItem()
@@ -148,6 +148,8 @@ public class ItemShop : MonoBehaviour
 
         item.transform.SetParent(shopContent);
         item.isOwnedByShop = true;
+
+        coinSFX.Play();
     }
 
     private InventoryItem FindFirstItemOfPath(string compareString)

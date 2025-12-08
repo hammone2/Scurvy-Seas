@@ -25,33 +25,34 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        int maxEnemies = enemySpawnPoints.Length;
-        int minEnemies = 1;
-        List<int> visitedPoints = new List<int>();
-        int enemiesToSpawn = Random.Range(minEnemies, maxEnemies);
-
-        for (int i = 0; i < enemiesToSpawn; i++)
-        {
-            int spawnPointIndex = Random.Range(0,enemySpawnPoints.Length);
-            if (visitedPoints.Contains(spawnPointIndex))
-            {
-                for (int j = 0; j < enemySpawnPoints.Length; j++)
-                {
-                    if (!visitedPoints.Contains(j))
-                        spawnPointIndex = j;
-                }
-            }
-
-            visitedPoints.Add(spawnPointIndex);
-            int randomEnemyIndex = Random.Range(0,enemyPrefabs.Length);
-            GameObject randomEnemy = Instantiate(enemyPrefabs[randomEnemyIndex], 
-                enemySpawnPoints[spawnPointIndex].position, Quaternion.identity);
-
-            enemies.Add(randomEnemy);
-        }
-
         if (!GameManager.instance.isNewGame)
         {
+            //Spawn Enemies
+            int maxEnemies = enemySpawnPoints.Length;
+            int minEnemies = 1;
+            List<int> visitedPoints = new List<int>();
+            int enemiesToSpawn = Random.Range(minEnemies, maxEnemies);
+
+            for (int i = 0; i < enemiesToSpawn; i++)
+            {
+                int spawnPointIndex = Random.Range(0, enemySpawnPoints.Length);
+                if (visitedPoints.Contains(spawnPointIndex))
+                {
+                    for (int j = 0; j < enemySpawnPoints.Length; j++)
+                    {
+                        if (!visitedPoints.Contains(j))
+                            spawnPointIndex = j;
+                    }
+                }
+
+                visitedPoints.Add(spawnPointIndex);
+                int randomEnemyIndex = Random.Range(0, enemyPrefabs.Length);
+                GameObject randomEnemy = Instantiate(enemyPrefabs[randomEnemyIndex],
+                    enemySpawnPoints[spawnPointIndex].position, Quaternion.identity);
+
+                enemies.Add(randomEnemy);
+            }
+
             //Load save data
             Invoke("LoadGame", 1f);
 
@@ -60,6 +61,16 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
+            //spawn easy enemies
+            for (int i = 0; i < enemySpawnPoints.Length; i++)
+            {
+                GameObject monster = Instantiate(enemyPrefabs[0],
+                    enemySpawnPoints[i].position, Quaternion.identity);
+
+                enemies.Add(monster);
+            }
+            
+
             //Set starting defaults
             InventorySystem inventory = InventorySystem.instance;
             inventory.gold = 1000;

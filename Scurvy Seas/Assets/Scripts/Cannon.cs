@@ -113,7 +113,9 @@ public class Cannon : MonoBehaviour
 
         ball.GetComponent<Projectile>().SetDamage(damage);
 
+        //play effects
         particles.Play();
+        GetComponent<AudioSource>().Play();
 
         if (task.isOwnedByPlayer)
         {

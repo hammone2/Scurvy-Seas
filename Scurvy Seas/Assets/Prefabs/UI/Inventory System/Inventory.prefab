@@ -45,5 +45,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryContent: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  itemInfo: {fileID: 0}
+  itemNameInfo: {fileID: 0}
+  itemSizeText: {fileID: 0}
+  itemValueText: {fileID: 0}
+  descriptionText: {fileID: 0}
+  currentStorageText: {fileID: 0}
   storageSize: 100
   currentStorageUsed: 0
+  itemDisplayArea: {fileID: 0}
+  itemDisplayOffset: {fileID: 0}
+  isShopping: 0
+  buyButton: {fileID: 0}
+  sellButton: {fileID: 0}
+  dropButton: {fileID: 0}
+  consumeButton: {fileID: 0}
+  stackSelectionUI: {fileID: 0}
+  selectedStackText: {fileID: 0}
+  stackSlider: {fileID: 0}
+  itemStackSelectSFX: {fileID: 0}
+  goldText: {fileID: 0}
