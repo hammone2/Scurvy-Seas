@@ -4,7 +4,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using NUnit.Framework.Interfaces;
 using System.Net;
-using static UnityEditor.Progress;
 
 public class ItemShop : MonoBehaviour
 {
