@@ -10,6 +10,7 @@ TagManager:
   - ItemDrop
   - Enemy
   - OutOfBounds
+  - PortSpace
   layers:
   - Default
   - TransparentFX

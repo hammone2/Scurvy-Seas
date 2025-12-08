@@ -50,9 +50,22 @@ public class MapRoomManager : MonoBehaviour
     private void UpdateMap()
     {
         int pos = GameManager.instance.GetCurrentLevel();
-        pos -= 1;
+        //pos -= 1;
+        Transform destination = mapPositions[pos];
+        GameObject space = destination.gameObject;
+
+        //is our destination a port?
+        if (destination.gameObject.CompareTag("PortSpace"))
+        {
+            GameManager.instance.isNextLevelAPort = true;
+        }
+        else
+        {
+            GameManager.instance.isNextLevelAPort = false;
+        }
+
         Vector3 startPos = mapPositions[pos - 1].position;
-        Vector3 endPos = mapPositions[pos].position;
+        Vector3 endPos = destination.position;
         StartCoroutine(FadeInIcon(startPos, endPos));
     }
 

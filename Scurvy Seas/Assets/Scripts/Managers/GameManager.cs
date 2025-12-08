@@ -5,8 +5,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool isNewGame = false;
+    public bool isNextLevelAPort = false;
     private int levelIterations = 2;
-    private int currentLevelIteration = 1;
+    private int currentLevelIteration = 0;
 
 
     private void Awake()
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
 
     public void GoToNextLevel()
     {
-        if (currentLevelIteration % levelIterations == 0)
+        if (/*currentLevelIteration % levelIterations == 0*/ isNextLevelAPort)
         {
             //go to tavern
             SceneManager.LoadScene("Port");
