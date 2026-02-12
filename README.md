@@ -1,7 +1,6 @@
 # Scurvy Seas
 
-Download: https://mind-virus-interactive.itch.io/scurvy-seas-indev
-
+Trailer: https://www.youtube.com/watch?v=JlsENZADH4Q
 
 # v0.2.3 Changelog:
 
